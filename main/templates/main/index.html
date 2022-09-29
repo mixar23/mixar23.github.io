@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <a href="/about-us" class="navbar-brand">about us</a>
-        <a href="/" class="navbar-brand">Главная</a>
-      </div>
-    <h1>Главная страница</h1>
-    <p1>Просто тескст</p1>
-</body>
-</html>
+{% extends 'main/base.html' %}
+
+{% block title %}
+
+Главная страница
+
+{% endblock%}
+
+{% block aboutcontent %}
+
+<h1>Главная страница</h1>
+<p1>Просто тескст</p1>
+
+{% endblock %}
