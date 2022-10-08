@@ -3,6 +3,13 @@
 {% load static%}
 
 {% block title %}
+
+</head>
+<body>
+<div class="container">
+    <a href="{% url 'about' %}" class="navbar-brand">about us</a>
+    <a href="{% url 'home' %}"  class="navbar-brand">Главная</a>
+</div>
  
 страница про нас!!
 
@@ -13,6 +20,7 @@
     .fig{
         text-align: center;
     }
+
 </style>
 {% endblock%}
 
@@ -20,6 +28,48 @@
 
 <h1>страница для нас<h1>
     <div
-        <p class = fig><img src= "{% static 'main/png/desk.png'%}" alt="chess_desk"/></p>
+        <p class = fig><img src= "{% static 'main/png/desk.png'%}" alt="chess_desk" id = "chess_desk"/></p>
+    </div>
+    <div
+        <img src= "{% static 'main/png/w_figures/chess.1.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figutr"/>
+        <script type="text/javascript">
+            var chess_figure = document.getElementById('chess_desk');
+
+             chess_figure.onmousedown = function(e) { 
+        // 1. отследить нажатие
+
+    // подготовить к перемещению
+    // 2. разместить на том же месте, но в абсолютных координатах
+            chess_figure.style.position = 'absolute';
+            moveAt(e);
+        // переместим в body, чтобы мяч был точно не внутри position:relative
+            document.body.appendChild(chess_figure);
+
+            chess_figure.style.zIndex = 1000; // показывать мяч над другими элементами
+
+    // передвинуть мяч под координаты курсора
+    // и сдвинуть на половину ширины/высоты для центрирования
+            function moveAt(e) {
+                chess_figure.style.left = e.pageX - chess_figure.offsetWidth / 2 + 'px';
+                chess_figure.style.top = e.pageY - chess_figure.offsetHeight / 2 + 'px';
+            }
+
+        // 3, перемещать по экрану
+            document.onmousemove = function(e) {
+                moveAt(e);
+            }
+
+        // 4. отследить окончание переноса
+            chess_figure.onmouseup = function() {
+                document.onmousemove = null;
+                chess_figure.onmouseup = null;
+            }
+            }
+            ball.ondragstart = function() {
+                return false;
+            };
+        </script>
+
+    
     </div>
 {% endblock %}
