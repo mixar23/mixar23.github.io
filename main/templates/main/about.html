@@ -3,9 +3,8 @@
 {% load static%}
 
 {% block title %}
+<link rel="stylesheet" type = "text/css" href="{% static 'main/css/main.css' %}">
 
-</head>
-<body>
 <div class="container">
     <a href="{% url 'about' %}" class="navbar-brand">about us</a>
     <a href="{% url 'home' %}"  class="navbar-brand">Главная</a>
@@ -17,9 +16,16 @@
 
 {% block text %}
 <style>
-    .fig{
+    {% comment %} .desk{
+        position :relative;
         text-align: center;
-    }
+    } {% endcomment %}
+
+    {% comment %} .figure{
+        position :absolute;
+        top :400px;
+        left :500px;
+} {% endcomment %}
 
 </style>
 {% endblock%}
@@ -27,13 +33,51 @@
 {% block aboutcontent %}
 
 <h1>страница для нас<h1>
-    <div
-        <p class = fig><img src= "{% static 'main/png/desk.png'%}" alt="chess_desk" id = "chess_desk"/></p>
-    </div>
-    <div
-        <img src= "{% static 'main/png/w_figures/chess.1.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figutr"/>
+    <div class = 'desk'>
+        <p><img src= "{% static 'main/png/desk.png'%}" alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
+    </div>  
+        {% comment %} white_figures {% endcomment %}
+        <img class = "figure_w_13" src= "{% static 'main/png/w_figures/chess.1.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_1"/> 
+        <img class = "figure_w_11" src= "{% static 'main/png/w_figures/chess.2.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_2"/>
+        <img class = "figure_w_12" src= "{% static 'main/png/w_figures/chess.3.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_3"/>
+        <img class = "figure_w_10" src= "{% static 'main/png/w_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_4"/>
+        <img class = "figure_w_9" src= "{% static 'main/png/w_figures/chess.5.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_5"/>
+        <img class = "figure_w_1" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_6"/>
+        <img class = "figure_w_2" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_7"/>
+        <img class = "figure_w_3" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_8"/>
+        <img class = "figure_w_4" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_9"/>
+        <img class = "figure_w_5" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_10"/>
+        <img class = "figure_w_6" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_11"/>
+        <img class = "figure_w_7" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_12"/>
+        <img class = "figure_w_8" src= "{% static 'main/png/w_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_13"/>
+        <img class = "figure_w_16" src= "{% static 'main/png/w_figures/chess.5.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_14"/>
+        <img class = "figure_w_14" src= "{% static 'main/png/w_figures/chess.2.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_15"/>
+        <img class = "figure_w_15" src= "{% static 'main/png/w_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_16"/>
+       
+       
+        {% comment %} black_figures {% endcomment %}
+        <img class = "figure_b_13" src= "{% static 'main/png/b_figures/chess.1.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_b"/> 
+        <img class = "figure_b_11" src= "{% static 'main/png/b_figures/chess.2.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_2_b"/>
+        <img class = "figure_b_12" src= "{% static 'main/png/b_figures/chess.3.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_3_b"/>
+        <img class = "figure_b_10" src= "{% static 'main/png/b_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_4_b"/>
+        <img class = "figure_b_9" src= "{% static 'main/png/b_figures/chess.5.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_5_b"/>
+        <img class = "figure_b_1" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_6_b"/>
+        <img class = "figure_b_2" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_7_b"/>
+        <img class = "figure_b_3" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_8_b"/>
+        <img class = "figure_b_4" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_9_b"/>
+        <img class = "figure_b_5" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_10_b"/>
+        <img class = "figure_b_6" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_11_b"/>
+        <img class = "figure_b_7" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_12_b"/>
+        <img class = "figure_b_8" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_13_b"/>
+        <img class = "figure_b_16" src= "{% static 'main/png/b_figures/chess.5.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_14_b"/>
+        <img class = "figure_b_14" src= "{% static 'main/png/b_figures/chess.2.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_15_b"/>
+        <img class = "figure_b_15" src= "{% static 'main/png/b_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_16_bs"/>
+        
+        
         <script type="text/javascript">
-            var chess_figure = document.getElementById('chess_desk');
+            
+            var chess_figure = document.getElementById('chess_figure_1');
+   
 
              chess_figure.onmousedown = function(e) { 
         // 1. отследить нажатие
@@ -65,11 +109,10 @@
                 chess_figure.onmouseup = null;
             }
             }
-            ball.ondragstart = function() {
+            chess_figure.ondragstart = function() {
                 return false;
             };
         </script>
 
-    
-    </div>
+
 {% endblock %}
