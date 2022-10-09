@@ -71,15 +71,20 @@
         <img class = "figure_b_8" src= "{% static 'main/png/b_figures/chess.6.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_13_b"/>
         <img class = "figure_b_16" src= "{% static 'main/png/b_figures/chess.5.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_14_b"/>
         <img class = "figure_b_14" src= "{% static 'main/png/b_figures/chess.2.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_15_b"/>
-        <img class = "figure_b_15" src= "{% static 'main/png/b_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_16_bs"/>
+        <img class = "figure_b_15" src= "{% static 'main/png/b_figures/chess.4.png'%}" width = 55 height = 55 alt="chess_figure" id = "chess_figure_16_b"/>
         
         
         <script type="text/javascript">
-            
-            
-            var chess_figure = document.getElementById('chess_figure_1');
-   
-             chess_figure.onmousedown = function(e) { 
+            var elements = []
+            var ids = ['chess_figure_1','chess_figure_2','chess_figure_3','chess_figure_4','chess_figure_5','chess_figure_6','chess_figure_7','chess_figure_8','chess_figure_9','chess_figure_10','chess_figure_11','chess_figure_12','chess_figure_13','chess_figure_14','chess_figure_15','chess_figure_16','chess_figure_1_b','chess_figure_2_b','chess_figure_3_b','chess_figure_4_b','chess_figure_5_b','chess_figure_6_b','chess_figure_7_b','chess_figure_8_b','chess_figure_9_b','chess_figure_10_b','chess_figure_11_b','chess_figure_12_b','chess_figure_13_b','chess_figure_14_b','chess_figure_15_b','chess_figure_16_b'];
+            for (let i = 0;i < 33;i++){
+                elements[i] = document.getElementById(ids[i]);
+
+            }
+            console.log(elements);
+            //var chess_figure = document.getElementById("chess_figure_1");
+            var chess_figure = elements[0];
+            chess_figure.onmousedown = function(e) { 
             // 1. отследить нажатие
 
             // подготовить к перемещению
@@ -91,7 +96,7 @@
 
             chess_figure.style.zIndex = 1000; // показывать фигура над другими элементами
 
-            // передвинуть фигура под координаты курсора
+            // передвинуть фигуру под координаты курсора
             // и сдвинуть на половину ширины/высоты для центрирования
             function moveAt(e) {
                 chess_figure.style.left = e.pageX - chess_figure.offsetWidth / 2 + 'px';
@@ -124,30 +129,38 @@
         </script>
 
 
-        {% comment %} <script type = 'text/javascript'>
-        var chess_figure = document.getElementById('chess_figure_2');
-        chess_figure.onmousedown = function(e) { 
-        chess_figure.style.position = 'absolute';
-        moveAt(e);
-        document.body.appendChild(chess_figure);
-        chess_figure.style.zIndex = 1000;
-        function moveAt(e) {
-            chess_figure.style.left = e.pageX - chess_figure.offsetWidth / 2 + 'px';
-            chess_figure.style.top = e.pageY - chess_figure.offsetHeight / 2 + 'px';
-        }
-        document.onmousemove = function(e) {
+        <script type = 'text/javascript'>
+        elements[1].onmousedown = function(e) { 
+            elements[1].style.position = 'absolute';
             moveAt(e);
-        }
-        chess_figure.onmouseup = function() {
-            document.onmousemove = null;
-            chess_figure.onmouseup = null;
-        }
-        }
-        chess_figure.ondragstart = function() {
+            document.body.appendChild(elements[1]);
+            elements[1].style.zIndex = 1000;
+            function moveAt(e) {
+                elements[1].style.left = e.pageX - elements[1].offsetWidth / 2 + 'px';
+                elements[1].style.top = e.pageY - elements[1].offsetHeight / 2 + 'px';
+            }
+            function div(val, by){
+                    return (val - val % by) / by;
+                }
+                //выравнивание по квадрату
+            function moveTo(e) {
+                elements[1].style.left = div((e.pageX - elements[1].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
+                elements[1].style.top = div((e.pageY - elements[1].offsetHeight / 2) + 32,55) * 55 - 6 + 'px';
+            }
+            document.onmousemove = function(e) {
+                moveAt(e);
+            }
+            elements[1].onmouseup = function(e) {
+                document.onmousemove = null;
+                elements[1].onmouseup = null;
+                moveTo(e);
+            }
+            }
+        elements[1].ondragstart = function() {
             return false;
         };   
 
-        </script>     {% endcomment %}
+        </script>
 
 
 {% endblock %}
