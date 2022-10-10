@@ -5,10 +5,7 @@
 <html lang="en">
 <head>
     <style>
-        .desk{
-            position :relative;
-            text-align: center;
-        }
+        
         {% comment %} white_figures {% endcomment %}
         .figure_w_13{
             position :absolute;
@@ -183,9 +180,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{%  endblock %}</title>
     {% block text %}{% endblock %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <a href="{% url 'about' %}" class="navbar-brand">about us</a>

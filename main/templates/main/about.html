@@ -1,9 +1,9 @@
 {% extends 'main/base.html' %}
 
-{% load static%}
+{% load static %}
 
 {% block title %}
-<link rel="stylesheet" type = "text/css" href="{% static 'main/css/main.css' %}">
+
 
 <div class="container">
     <a href="{% url 'about' %}" class="navbar-brand">about us</a>
@@ -15,24 +15,12 @@
 {% endblock%}
 
 {% block text %}
-<style>
-    {% comment %} .desk{
-        position :relative;
-        text-align: center;
-    } {% endcomment %}
 
-    {% comment %} .figure{
-        position :absolute;
-        top :400px;
-        left :500px;
-} {% endcomment %}
-
-</style>
 {% endblock%}
 
 {% block aboutcontent %}
 
-<h1>страница для нас<h1>
+<h1>страница для нас</h1>
     <div class = 'desk'>
         <p><img src= "{% static 'main/png/desk.png'%}" alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
     </div>  
@@ -77,10 +65,13 @@
         <script type="text/javascript">
             var elements = []
             var ids = ['chess_figure_1','chess_figure_2','chess_figure_3','chess_figure_4','chess_figure_5','chess_figure_6','chess_figure_7','chess_figure_8','chess_figure_9','chess_figure_10','chess_figure_11','chess_figure_12','chess_figure_13','chess_figure_14','chess_figure_15','chess_figure_16','chess_figure_1_b','chess_figure_2_b','chess_figure_3_b','chess_figure_4_b','chess_figure_5_b','chess_figure_6_b','chess_figure_7_b','chess_figure_8_b','chess_figure_9_b','chess_figure_10_b','chess_figure_11_b','chess_figure_12_b','chess_figure_13_b','chess_figure_14_b','chess_figure_15_b','chess_figure_16_b'];
-            for (let i = 0;i < 33;i++){
+            for (let i = 0;i < 32;i++){
                 elements[i] = document.getElementById(ids[i]);
                 elements[i].onmousedown = function(e) { 
                     elements[i].style.position = 'absolute';
+                    var first_coorx = div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
+                    var first_coory = div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 6 + 'px';
+                    console.log(first_coorx,first_coory);
                     moveAt(e);
                     document.body.appendChild(elements[i]);
                     elements[i].style.zIndex = 1000;
@@ -102,7 +93,26 @@
                     elements[i].onmouseup = function(e) {
                         document.onmousemove = null;
                         elements[i].onmouseup = null;
-                        moveTo(e);
+                        //проверка что конечные координаты находятся на доске
+                        if (div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 > 901){
+                            elements[i].style.left = first_coorx;
+                            elements[i].style.top = first_coory;
+
+                        }else if(div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 < 461){
+                            elements[i].style.left = first_coorx;
+                            elements[i].style.top = first_coory;
+
+                        }else if(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 6 > 546){
+                            elements[i].style.left = first_coorx;
+                            elements[i].style.top = first_coory;
+
+                        }else if(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 6 < 106){
+                            elements[i].style.left = first_coorx;
+                            elements[i].style.top = first_coory;
+
+                        }else{
+                            moveTo(e);
+                        }
                     }
                     }
                 elements[i].ondragstart = function() {
@@ -113,6 +123,5 @@
             console.log(elements);
 
         </script>
-
 
 {% endblock %}

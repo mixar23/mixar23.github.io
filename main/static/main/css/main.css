@@ -1,3 +1,10 @@
-body{
-    background-color: red;
+h1{
+    background-color: #e2e61f;
+}
+.desk{
+    position :absolute;
+    left :435px;
+}
+p{
+    background-color: #2b21b4;
 }

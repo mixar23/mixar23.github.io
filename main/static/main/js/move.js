@@ -30,24 +30,3 @@
 //         chess_figure.onmouseup = null;
 //     }
 // }
-                var chess_figure = document.getElementById('chess_figure_2');
-                chess_figure.onmousedown = function(e) { 
-                chess_figure.style.position = 'absolute';
-                moveAt(e);
-                document.body.appendChild(chess_figure);
-                chess_figure.style.zIndex = 1000;
-                function moveAt(e) {
-                    chess_figure.style.left = e.pageX - chess_figure.offsetWidth / 2 + 'px';
-                    chess_figure.style.top = e.pageY - chess_figure.offsetHeight / 2 + 'px';
-                }
-                document.onmousemove = function(e) {
-                    moveAt(e);
-                }
-                chess_figure.onmouseup = function() {
-                    document.onmousemove = null;
-                    chess_figure.onmouseup = null;
-                }
-                }
-                chess_figure.ondragstart = function() {
-                    return false;
-                };
