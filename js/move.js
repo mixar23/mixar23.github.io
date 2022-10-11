@@ -278,7 +278,7 @@ function is_figure_on_diagline(x,y,x0,y0,board){
             l--;
         }
         if(i != x){
-            if (board([i][l]) != 0){
+            if (board[i][l] != 0){
                 return false;
             }
         }else{
@@ -288,40 +288,40 @@ function is_figure_on_diagline(x,y,x0,y0,board){
 
 
 
-    if (x = x0){
-        if (y > y0){
-            for (let i = y0; i < y; i++){
-                if (board[x][i] != 0){
-                    return false;
-                }
-            }
-        }
-        if (y < y0){
-            for (let i = y0; i > y; i--){
-                if (board[x][i] != 0){
-                    return false;
-                }
-            }
-        }
-    }
+    // if (x = x0){
+    //     if (y > y0){
+    //         for (let i = y0; i < y; i++){
+    //             if (board[x][i] != 0){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    //     if (y < y0){
+    //         for (let i = y0; i > y; i--){
+    //             if (board[x][i] != 0){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    // }
 
-    //для столбцов
-    if (y = y0){
-        if (x > x0){
-            for (let i = x0; i < x; i++){
-                if (board[x][i] != 0){
-                    return false;
-                }
-            }
-        }
-        if (x < y0){
-            for (let i = x0; i > x; i--){
-                if (board[x][i] != 0){
-                    return false;
-                }
-            }
-        }
-    }
+    // //для столбцов
+    // if (y = y0){
+    //     if (x > x0){
+    //         for (let i = x0; i < x; i++){
+    //             if (board[x][i] != 0){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    //     if (x < y0){
+    //         for (let i = x0; i > x; i--){
+    //             if (board[x][i] != 0){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    // }
 
 
     }

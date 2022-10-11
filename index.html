@@ -147,7 +147,21 @@
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }                                
-                                    }else{
+                                    }else if((bd[x0_coord][y0_coord]  % 6 == 2)){
+                                        console.log('это слон');
+                                        console.log(is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd));
+                                        if(is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
+                                            moveTo(e);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            console.log('uspeh@!!!@');
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        } 
+
+                                    }          
+                                     else{
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
@@ -165,6 +179,24 @@
                                     if (bd[x0_coord][y0_coord] % 6 == 4){
                                         //проверяем может ли эту фигуру съесть ладья
                                         if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
+                                            //съедаем фигуру если она другого цвета и занимаем ее место
+                                            var id_down_fig = id_place[x_coord][y_coord];
+                                            fig = document.getElementById(id_down_fig);
+                                            fig.parentNode.removeChild(fig);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            id_place[x0_coord][y0_coord] = 0;
+                                            bd[x0_coord][y0_coord] = 0;
+                                            moveTo(e)
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }
+                                    }
+                                    if (bd[x0_coord][y0_coord] % 6 == 2){
+                                        //проверяем может ли эту фигуру съесть слон
+                                        console.log('check');
+                                        if (is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd)){
                                             //съедаем фигуру если она другого цвета и занимаем ее место
                                             var id_down_fig = id_place[x_coord][y_coord];
                                             fig = document.getElementById(id_down_fig);
