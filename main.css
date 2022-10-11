@@ -1,3 +1,9 @@
+head{
+    background-color: blueviolet;
+}
+body{
+    background-color: brown;
+}
 .desk{
     position :absolute;
     left :435px;
