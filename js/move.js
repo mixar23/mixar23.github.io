@@ -5,14 +5,14 @@ function changepos(x,y,x1,y1,board_in){
     var board = board_in;
     board[x1][y1] = board[x][y];
     board[x][y] = 0;
-    return board
+    return board;
     
 }
 //возможные ходы по пустому полю из точки с координатами x y фигурой fig 
 function can_move_to(x,y,fig){
     blocks = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]
     blocks[x][y]  = 1;
-    //как ходят лдьи
+    //как ходят ладьи
     if (fig%6 == 4){
         for (let i = 0;i < 8;i++){
             for (let l = 0;l < 8;l++){
@@ -183,7 +183,145 @@ function can_move_to(x,y,fig){
 
 }
 
-function ayailable_box(x,y,board,fig){
+// function ayailable_box(x0,y0,board,fig){//board расположение фигур в данный момент
+//     blocks = can_move_to(x0,y0,fig);
+//     //если на месте стоит фигура ставим значение возможности хода 0 в списке возможных ходов
+//     for (let i = 0; i <= 7;i++){
+//         for( let l = 0; l<= 7;l++){
+//             // смотрим есть ли на этом месте сейчас фигура 
+//             if (board[i][l] != 0){
+//                 if (div(board[i][l],7)-div(fig,7) != 0){//смотрит если фигуры разного цвета
+//                     blocks[i][l] = 0;
+//                 }
+//             }
+            
+//         }
+//     }
+//     return blocks;
+//     }
 
+//проверим есть ли на линии к точке фигура
+//true если нет, false если есть
+function is_figure_on_line(x,y,x0,y0,board){
+
+    //для строки
+    if (x == x0){
+        if (y > y0){
+            var i = y0 + 1;
+            while (i != y){
+                
+                if (board[x][i] != 0){
+                    return false;
+                }
+                i++;
+                
+            }
+            return true;
+        }
+        if (y < y0){
+            var i = y0 - 1;
+            while (i != y){
+                
+                if (board[x][i] != 0){
+                    return false;
+                }
+                i--;
+            }
+            return true;
+        }
+    }
+
+    //для столбцов
+    if (y == y0){
+        console.log('step');
+        if (x > x0){
+            console.log('step');
+            var i = x0 + 1;
+            while (i != x){
+                
+                if (board[i][y] != 0){
+                    return false;
+                }
+                i++;
+                
+            }
+            return true;
+        }
+        if (x < x0){
+            console.log('step');
+            var i = x0 - 1;
+            while (i != x){
+                console.log('step');
+                if (board[i][y] != 0){
+                    return false;
+                }
+                i--;     
+            }
+            return true;
+        }
+    }
 
 }
+
+function is_figure_on_diagline(x,y,x0,y0,board){
+    var i = x0;
+    var l = y0;
+    while((i != x)&&(l != y)){
+        if (x > x0){
+            i++;
+        }else{
+            i--;
+        }
+        if (y >y0){
+            l++;
+        }else{
+            l--;
+        }
+        if(i != x){
+            if (board([i][l]) != 0){
+                return false;
+            }
+        }else{
+            return true;
+        }
+    }
+
+
+
+    if (x = x0){
+        if (y > y0){
+            for (let i = y0; i < y; i++){
+                if (board[x][i] != 0){
+                    return false;
+                }
+            }
+        }
+        if (y < y0){
+            for (let i = y0; i > y; i--){
+                if (board[x][i] != 0){
+                    return false;
+                }
+            }
+        }
+    }
+
+    //для столбцов
+    if (y = y0){
+        if (x > x0){
+            for (let i = x0; i < x; i++){
+                if (board[x][i] != 0){
+                    return false;
+                }
+            }
+        }
+        if (x < y0){
+            for (let i = x0; i > x; i--){
+                if (board[x][i] != 0){
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    }

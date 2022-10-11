@@ -131,12 +131,29 @@
     
                             }else if (bd[x_coord][y_coord] == 0){// если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
-                                console.log(steps)
+                                console.log(steps);
+                                console.log(x_coord,y_coord,x0_coord,y0_coord,bd);
                                 if(steps[x_coord][y_coord] == 1){
-                                    moveTo(e);
-                                    bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                    id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                    console.log(bd);
+                                    //если ладья проверяем нет на линиях лишних фигур
+                                    if((bd[x0_coord][y0_coord]  % 6 == 4)){
+                                        console.log('это ладья');
+                                        console.log(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd));
+                                        if(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
+                                            moveTo(e);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            console.log('uspeh@!!!@');
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }                                
+                                    }else{
+                                        moveTo(e);
+                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                        console.log(bd);
+                                    }
+                                    
                                 }else{
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
@@ -145,15 +162,34 @@
                             }else{
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
                                 if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
-                                    //съедаем фигуру если она другого цвета и занимаем ее место
-                                    var id_down_fig = id_place[x_coord][y_coord];
-                                    fig = document.getElementById(id_down_fig);
-                                    fig.parentNode.removeChild(fig);
-                                    bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                    id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                    id_place[x0_coord][y0_coord] = 0;
-                                    bd[x0_coord][y0_coord] = 0;
-                                    moveTo(e)
+                                    if (bd[x0_coord][y0_coord] % 6 == 4){
+                                        //проверяем может ли эту фигуру съесть ладья
+                                        if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
+                                            //съедаем фигуру если она другого цвета и занимаем ее место
+                                            var id_down_fig = id_place[x_coord][y_coord];
+                                            fig = document.getElementById(id_down_fig);
+                                            fig.parentNode.removeChild(fig);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            id_place[x0_coord][y0_coord] = 0;
+                                            bd[x0_coord][y0_coord] = 0;
+                                            moveTo(e)
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }
+                                    }else{
+                                        //съедаем фигуру если она другого цвета и занимаем ее место
+                                        var id_down_fig = id_place[x_coord][y_coord];
+                                        fig = document.getElementById(id_down_fig);
+                                        fig.parentNode.removeChild(fig);
+                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                        id_place[x0_coord][y0_coord] = 0;
+                                        bd[x0_coord][y0_coord] = 0;
+                                        moveTo(e)
+
+                                    }
                                 }else{
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
