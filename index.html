@@ -130,10 +130,17 @@
                                 elements[i].style.top = first_coory;
     
                             }else if (bd[x_coord][y_coord] == 0){// если поле пустое то передвигаем элементы в матрице и на доске
-                                moveTo(e);
-                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                console.log(bd);
+                                steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
+                                console.log(steps)
+                                if(steps[x_coord][y_coord] == 1){
+                                    moveTo(e);
+                                    bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                    id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                    console.log(bd);
+                                }else{
+                                    elements[i].style.left = first_coorx;
+                                    elements[i].style.top = first_coory;
+                                }
                                 
                             }else{
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
