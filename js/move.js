@@ -262,7 +262,8 @@ function is_figure_on_line(x,y,x0,y0,board){
     }
 
 }
-
+//проверим есть ли на диагонале к точке фигура
+//true если нет, false если есть
 function is_figure_on_diagline(x,y,x0,y0,board){
     var i = x0;
     var l = y0;
@@ -285,43 +286,5 @@ function is_figure_on_diagline(x,y,x0,y0,board){
             return true;
         }
     }
-
-
-
-    // if (x = x0){
-    //     if (y > y0){
-    //         for (let i = y0; i < y; i++){
-    //             if (board[x][i] != 0){
-    //                 return false;
-    //             }
-    //         }
-    //     }
-    //     if (y < y0){
-    //         for (let i = y0; i > y; i--){
-    //             if (board[x][i] != 0){
-    //                 return false;
-    //             }
-    //         }
-    //     }
-    // }
-
-    // //для столбцов
-    // if (y = y0){
-    //     if (x > x0){
-    //         for (let i = x0; i < x; i++){
-    //             if (board[x][i] != 0){
-    //                 return false;
-    //             }
-    //         }
-    //     }
-    //     if (x < y0){
-    //         for (let i = x0; i > x; i--){
-    //             if (board[x][i] != 0){
-    //                 return false;
-    //             }
-    //         }
-    //     }
-    // }
-
 
     }

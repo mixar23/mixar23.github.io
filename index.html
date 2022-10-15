@@ -62,8 +62,7 @@
             </script>
     
             <script type="text/javascript">
-                var test = can_move_to(6,2,7);
-                console.log(test);
+
                 var elements = [];
                 //base_desk:
                 var bd = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
@@ -73,8 +72,9 @@
                 var id_place = [["chess_figure_5_b","chess_figure_4_b","chess_figure_2_b","chess_figure_3_b","chess_figure_1_b","chess_figure_15_b","chess_figure_16_b","chess_figure_14_b"],["chess_figure_6_b","chess_figure_7_b","chess_figure_8_b","chess_figure_9_b","chess_figure_10_b","chess_figure_11_b","chess_figure_12_b","chess_figure_13_b"],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],["chess_figure_6","chess_figure_7","chess_figure_8","chess_figure_9","chess_figure_10","chess_figure_11","chess_figure_12","chess_figure_13"],["chess_figure_5","chess_figure_4","chess_figure_2","chess_figure_3","chess_figure_1","chess_figure_15","chess_figure_16","chess_figure_14"]];
     
                 for (let i = 0;i < 32;i++){
+                    
                     elements[i] = document.getElementById(ids[i]);
-                    elements[i].onmousedown = function(e) { 
+                    elements[i].onmousedown = function(e) {
     
                         //определим координаты квадрата начала движения
                         var y0_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
@@ -105,11 +105,12 @@
                         }
                         elements[i].onmouseup = function(e) {
                             document.onmousemove = null;
+                            
                             elements[i].onmouseup = null;
                             //определим координаты квадрата окончания движения
                             var y_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
                             var x_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);
-                            console.log('координаты конца: ',x_coord,y_coord);
+                            console.log('координаты конца: ',x_coord,y_coord,bd);
     
     
                             //проверка что конечные координаты находятся на доске
@@ -131,13 +132,10 @@
     
                             }else if (bd[x_coord][y_coord] == 0){// если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
-                                console.log(steps);
-                                console.log(x_coord,y_coord,x0_coord,y0_coord,bd);
                                 if(steps[x_coord][y_coord] == 1){
                                     //если ладья проверяем нет на линиях лишних фигур
                                     if((bd[x0_coord][y0_coord]  % 6 == 4)){
                                         console.log('это ладья');
-                                        console.log(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd));
                                         if(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
@@ -149,19 +147,17 @@
                                         }                                
                                     }else if((bd[x0_coord][y0_coord]  % 6 == 2)){
                                         console.log('это слон');
-                                        console.log(is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd));
                                         if(is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            console.log('uspeh@!!!@');
+                                            console.log('uspeh@!!!@'); 
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         } 
 
-                                    }          
-                                     else{
+                                    }else{
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
@@ -174,12 +170,15 @@
                                 }
                                 
                             }else{
+                                steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
                                 if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
                                     if (bd[x0_coord][y0_coord] % 6 == 4){
                                         //проверяем может ли эту фигуру съесть ладья
+
+                                        console.log('this is ladya');
                                         if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
-                                            //съедаем фигуру если она другого цвета и занимаем ее место
+                                            //съедаем фигуру  и занимаем ее место
                                             var id_down_fig = id_place[x_coord][y_coord];
                                             fig = document.getElementById(id_down_fig);
                                             fig.parentNode.removeChild(fig);
@@ -192,12 +191,11 @@
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }
-                                    }
-                                    if (bd[x0_coord][y0_coord] % 6 == 2){
+                                    }else if (bd[x0_coord][y0_coord] % 6 == 2){
                                         //проверяем может ли эту фигуру съесть слон
-                                        console.log('check');
+                                        console.log('this is slon');
                                         if (is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd)){
-                                            //съедаем фигуру если она другого цвета и занимаем ее место
+                                            //съедаем фигуру и занимаем ее место
                                             var id_down_fig = id_place[x_coord][y_coord];
                                             fig = document.getElementById(id_down_fig);
                                             fig.parentNode.removeChild(fig);
@@ -210,7 +208,10 @@
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }
-                                    }else{
+                                    
+                                    }else{//не мог долго найти почему все фигуры ест ладья
+                                        //а этот else был вложен в if только слона, т.е. для каждой фигуры кроме слона он выполнялся))
+                                        console.log('wrog_Step!!!!!1')
                                         //съедаем фигуру если она другого цвета и занимаем ее место
                                         var id_down_fig = id_place[x_coord][y_coord];
                                         fig = document.getElementById(id_down_fig);
@@ -220,8 +221,11 @@
                                         id_place[x0_coord][y0_coord] = 0;
                                         bd[x0_coord][y0_coord] = 0;
                                         moveTo(e)
-
                                     }
+                                    
+                                    
+
+                                    
                                 }else{
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
