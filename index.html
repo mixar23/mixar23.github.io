@@ -157,11 +157,30 @@
                                             elements[i].style.top = first_coory;
                                         } 
 
+                                    }else if((bd[x0_coord][y0_coord]  % 6 == 5)){
+                                        console.log('это ферзь');
+                                        if ((is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true) && ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true)){
+                                            console.log('hello')
+                                            moveTo(e);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            console.log('uspeh@!!!@'); 
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }
+
+                                    }else if (bd[x0_coord][y0_coord] % 6 == 1){
+                                    if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == false){
+                                        elements[i].style.left = first_coorx;
+                                        elements[i].style.top = first_coory;
                                     }else{
+                                        console.log('herer',bd,steps);
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                        console.log(bd);
+
+                                    }
                                     }
                                     
                                 }else{
@@ -170,8 +189,9 @@
                                 }
                                 
                             }else{
-                                steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
+                                
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
+                                steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                                 if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
                                     if (bd[x0_coord][y0_coord] % 6 == 4){
                                         //проверяем может ли эту фигуру съесть ладья
@@ -209,10 +229,56 @@
                                             elements[i].style.top = first_coory;
                                         }
                                     
-                                    }else{//не мог долго найти почему все фигуры ест ладья
-                                        //а этот else был вложен в if только слона, т.е. для каждой фигуры кроме слона он выполнялся))
-                                        console.log('wrog_Step!!!!!1')
+                                    }else if (bd[x0_coord][y0_coord] % 6 == 5){
+                                        //проверяем может ли эту фигуру съесть ферзь
+                                        console.log('ферзь');
+                                        if ((is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true) && ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true)){
+                                            //съедаем фигуру и занимаем ее место
+                                            var id_down_fig = id_place[x_coord][y_coord];
+                                            fig = document.getElementById(id_down_fig);
+                                            fig.parentNode.removeChild(fig);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            id_place[x0_coord][y0_coord] = 0;
+                                            bd[x0_coord][y0_coord] = 0;
+                                            moveTo(e)
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }
+                                    
+                                    }else if(bd[x0_coord][y0_coord] % 6 == 0) {//Короли
+                                        //хмм
+                                        console.log('король');
                                         //съедаем фигуру если она другого цвета и занимаем ее место
+                                        var id_down_fig = id_place[x_coord][y_coord];
+                                        fig = document.getElementById(id_down_fig);
+                                        fig.parentNode.removeChild(fig);
+                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                        id_place[x0_coord][y0_coord] = 0;
+                                        bd[x0_coord][y0_coord] = 0;
+                                        moveTo(e)
+                                    }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
+                                        //стоит ли между пешкой и фигурой другая фигура
+                                        if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
+                                            console.log('пешка');
+                                            //съедаем фигуру если она другого цвета и занимаем ее место
+                                            var id_down_fig = id_place[x_coord][y_coord];
+                                            fig = document.getElementById(id_down_fig);
+                                            fig.parentNode.removeChild(fig);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            id_place[x0_coord][y0_coord] = 0;
+                                            bd[x0_coord][y0_coord] = 0;
+                                            moveTo(e)
+                                        }else{
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }
+                                            
+                                    }else if (bd[x0_coord][y0_coord] % 6 == 1){//это конь
+                                        console.log('конь');
                                         var id_down_fig = id_place[x_coord][y_coord];
                                         fig = document.getElementById(id_down_fig);
                                         fig.parentNode.removeChild(fig);
@@ -240,7 +306,6 @@
                     };   
     
                 }
-                console.log(elements);
     
             </script></p>
 

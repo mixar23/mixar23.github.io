@@ -260,6 +260,7 @@ function is_figure_on_line(x,y,x0,y0,board){
             return true;
         }
     }
+    return true;
 
 }
 //проверим есть ли на диагонале к точке фигура
@@ -286,5 +287,6 @@ function is_figure_on_diagline(x,y,x0,y0,board){
             return true;
         }
     }
+    return true;
 
     }
