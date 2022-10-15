@@ -175,12 +175,16 @@
                                         elements[i].style.left = first_coorx;
                                         elements[i].style.top = first_coory;
                                     }else{
-                                        console.log('herer',bd,steps);
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
 
                                     }
+                                    }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
+                                        console.log('конь or король');
+                                        moveTo(e);
+                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                     }
                                     
                                 }else{
