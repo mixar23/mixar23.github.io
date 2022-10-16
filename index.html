@@ -131,8 +131,8 @@
                                 elements[i].style.top = first_coory;
                             
                             //ready block
-                            }else if (bd[x_coord][y_coord] == 0){// если поле пустое то передвигаем элементы в матрице и на доске
-                                console.log(is_figure_on_line(5,3,6,3,[[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]]))
+                            }else if (bd[x_coord][y_coord] == 0){
+                                // если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                                 if(steps[x_coord][y_coord] == 1){
                                     //если ладья проверяем нет на линиях лишних фигур
@@ -153,7 +153,6 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            console.log('uspeh@!!!@'); 
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -162,19 +161,15 @@
                                     }else if((bd[x0_coord][y0_coord]  % 6 == 5)){
                                         console.log('это ферзь');
                                         if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
-                                            console.log('hello')
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            console.log('uspeh@!!!@'); 
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }
                                         //белая пешка
                                     }else if (bd[x0_coord][y0_coord] == 7){
-                                        console.log(bd,x_coord,y_coord,x0_coord,y0_coord,is_figure_on_line,'///////////////');
-                        
                                         if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)){
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -186,8 +181,6 @@
                                         }
                                         //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
-                                        console.log(bd,x_coord,y_coord,x0_coord,y0_coord,is_figure_on_line,'///////////////');
-                        
                                         if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -204,7 +197,6 @@
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                     }
                                 }else{
-                                    console.log('ggg');
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
                                 }
@@ -230,7 +222,6 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                             }else{
-                                                console.log('tut');
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
                                             }
@@ -297,7 +288,6 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                             }else{
-                                                console.log('tut1');
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
                                             }

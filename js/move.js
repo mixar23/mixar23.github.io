@@ -1,12 +1,6 @@
 var deafault_board = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
 
-var abra = [0,1,2];
-if (abra[0] == 0){
-    abra[0] = 1;
-}else{
-    abra[2] = 3;
-}
-console.log(abra);
+
 
 function changepos(x,y,x1,y1,board_in){
     var board = board_in;
@@ -252,7 +246,6 @@ function is_figure_on_line(x,y,x0,y0,board){
     }else if (y == y0){
         console.log('stolbec');
         var ind = x0;
-        console.log('step4');
         if (x > x0){
             while (ind != x - 1){
                 ind++;
