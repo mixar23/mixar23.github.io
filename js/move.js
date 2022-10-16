@@ -1,5 +1,12 @@
 var deafault_board = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
 
+var abra = [0,1,2];
+if (abra[0] == 0){
+    abra[0] = 1;
+}else{
+    abra[2] = 3;
+}
+console.log(abra);
 
 function changepos(x,y,x1,y1,board_in){
     var board = board_in;
@@ -183,110 +190,127 @@ function can_move_to(x,y,fig){
 
 }
 
-// function ayailable_box(x0,y0,board,fig){//board расположение фигур в данный момент
-//     blocks = can_move_to(x0,y0,fig);
-//     //если на месте стоит фигура ставим значение возможности хода 0 в списке возможных ходов
-//     for (let i = 0; i <= 7;i++){
-//         for( let l = 0; l<= 7;l++){
-//             // смотрим есть ли на этом месте сейчас фигура 
-//             if (board[i][l] != 0){
-//                 if (div(board[i][l],7)-div(fig,7) != 0){//смотрит если фигуры разного цвета
-//                     blocks[i][l] = 0;
-//                 }
-//             }
-            
-//         }
-//     }
-//     return blocks;
-//     }
+
 
 //проверим есть ли на линии к точке фигура
 //true если нет, false если есть
+
+//проверим есть ли на диагонале к точке фигура
+//true если нет, false если есть
+// function is_figure_on_diagline(x,y,x0,y0,board){
+//     var ind = x0;
+//     var lnd = y0;
+//     // if ((x0 == x)||(y0 == y)){
+//     //     return true;
+//     // }
+//     while((ind != x)&&(lnd != y)){
+//         if (x > x0){
+//             ind++;
+//         }else{
+//             ind--;
+//         }
+//         if (y >y0){
+//             lnd++;
+//         }else{
+//             lnd--;
+//         }
+//         if(ind != x){
+//             if (board[ind][lnd] != 0){
+//                 return false;
+//             }
+//         }else{
+//             return true;
+//         }
+//     }
+//     return true;
+
+//     }
 function is_figure_on_line(x,y,x0,y0,board){
 
     //для строки
     if (x == x0){
-        if (y > y0){
-            var i = y0 + 1;
-            while (i != y){
-                
-                if (board[x][i] != 0){
+        console.log('stroka');
+        var ind = y0;
+        if (y > y0){            
+            while (ind != y-1){             
+                ind++;
+                if (board[x][ind] != 0){
                     return false;
-                }
-                i++;
-                
+                }                
             }
             return true;
         }
         if (y < y0){
-            var i = y0 - 1;
-            while (i != y){
-                
-                if (board[x][i] != 0){
+            while (ind != y+1){
+                ind--;
+                if (board[x][ind] != 0){
                     return false;
                 }
-                i--;
             }
             return true;
         }
-    }
-
-    //для столбцов
-    if (y == y0){
-        console.log('step');
+    }else if (y == y0){
+        console.log('stolbec');
+        var ind = x0;
+        console.log('step4');
         if (x > x0){
-            console.log('step');
-            var i = x0 + 1;
-            while (i != x){
-                
-                if (board[i][y] != 0){
+            while (ind != x - 1){
+                ind++;
+                if (board[ind][y] != 0){
                     return false;
                 }
-                i++;
+                
                 
             }
             return true;
         }
         if (x < x0){
-            console.log('step');
-            var i = x0 - 1;
-            while (i != x){
-                console.log('step');
-                if (board[i][y] != 0){
+            while (ind != x +1){
+                ind--;  
+                if (board[ind][y] != 0){
                     return false;
                 }
-                i--;     
+                
             }
             return true;
         }
-    }
-    return true;
-
-}
-//проверим есть ли на диагонале к точке фигура
-//true если нет, false если есть
-function is_figure_on_diagline(x,y,x0,y0,board){
-    var i = x0;
-    var l = y0;
-    while((i != x)&&(l != y)){
-        if (x > x0){
-            i++;
-        }else{
-            i--;
-        }
-        if (y >y0){
-            l++;
-        }else{
-            l--;
-        }
-        if(i != x){
-            if (board[i][l] != 0){
+        return true;
+    }else{
+        console.log('diagonal');
+        var ind = x0;
+        var lnd = y0;
+        // if ((x0 == x)||(y0 == y)){
+        //     return true;
+        // }
+        while((ind != x)&&(lnd != y)){
+            if (x > x0){
+                if(ind == x - 1){
+                    return true;
+                }
+                ind++;
+            }else{
+                if(ind == x + 1){
+                    return true;
+                }
+                ind--;
+            }
+            if (y >y0){
+                if(ind == y - 1){
+                    return true;
+                }
+                lnd++;
+            }else{
+                if(ind == y + 1){
+                    return true;
+                }
+                lnd--;
+            } 
+            if (board[ind][lnd] != 0){
                 return false;
             }
-        }else{
-            return true;
         }
-    }
-    return true;
+        return true;
 
     }
+
+}

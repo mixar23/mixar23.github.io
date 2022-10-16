@@ -105,7 +105,7 @@
                         }
                         elements[i].onmouseup = function(e) {
                             document.onmousemove = null;
-                            
+
                             elements[i].onmouseup = null;
                             //определим координаты квадрата окончания движения
                             var y_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
@@ -129,8 +129,10 @@
                             }else if(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 < 100){
                                 elements[i].style.left = first_coorx;
                                 elements[i].style.top = first_coory;
-    
+                            
+                            //ready block
                             }else if (bd[x_coord][y_coord] == 0){// если поле пустое то передвигаем элементы в матрице и на доске
+                                console.log(is_figure_on_line(5,3,6,3,[[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]]))
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                                 if(steps[x_coord][y_coord] == 1){
                                     //если ладья проверяем нет на линиях лишних фигур
@@ -147,7 +149,7 @@
                                         }                                
                                     }else if((bd[x0_coord][y0_coord]  % 6 == 2)){
                                         console.log('это слон');
-                                        if(is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
+                                        if(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
@@ -159,7 +161,7 @@
 
                                     }else if((bd[x0_coord][y0_coord]  % 6 == 5)){
                                         console.log('это ферзь');
-                                        if ((is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true) && ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true)){
+                                        if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
                                             console.log('hello')
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
@@ -169,104 +171,109 @@
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }
+                                        //белая пешка
+                                    }else if (bd[x0_coord][y0_coord] == 7){
+                                        console.log(bd,x_coord,y_coord,x0_coord,y0_coord,is_figure_on_line,'///////////////');
+                        
+                                        if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)){
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }else{
+                                            moveTo(e);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
 
-                                    }else if (bd[x0_coord][y0_coord] % 6 == 1){
-                                    if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == false){
-                                        elements[i].style.left = first_coorx;
-                                        elements[i].style.top = first_coory;
-                                    }else{
-                                        moveTo(e);
-                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                        }
+                                        //черная пешка
+                                    }else if (bd[x0_coord][y0_coord] == 1){
+                                        console.log(bd,x_coord,y_coord,x0_coord,y0_coord,is_figure_on_line,'///////////////');
+                        
+                                        if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
+                                            elements[i].style.left = first_coorx;
+                                            elements[i].style.top = first_coory;
+                                        }else{
+                                            moveTo(e);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
 
-                                    }
+                                        }
                                     }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
                                         console.log('конь or король');
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                     }
-                                    
                                 }else{
+                                    console.log('ggg');
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
                                 }
                                 
                             }else{
-                                
+                            //ready block end  
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
-                                if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
-                                    if (bd[x0_coord][y0_coord] % 6 == 4){
-                                        //проверяем может ли эту фигуру съесть ладья
+                                if (steps[x_coord][y_coord] == 1){
+                                    if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
+                                        if (bd[x0_coord][y0_coord] % 6 == 4){
+                                            //проверяем может ли эту фигуру съесть ладья
 
-                                        console.log('this is ladya');
-                                        if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
-                                            //съедаем фигуру  и занимаем ее место
-                                            var id_down_fig = id_place[x_coord][y_coord];
-                                            fig = document.getElementById(id_down_fig);
-                                            fig.parentNode.removeChild(fig);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            id_place[x0_coord][y0_coord] = 0;
-                                            bd[x0_coord][y0_coord] = 0;
-                                            moveTo(e)
-                                        }else{
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
-                                        }
-                                    }else if (bd[x0_coord][y0_coord] % 6 == 2){
-                                        //проверяем может ли эту фигуру съесть слон
-                                        console.log('this is slon');
-                                        if (is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd)){
-                                            //съедаем фигуру и занимаем ее место
-                                            var id_down_fig = id_place[x_coord][y_coord];
-                                            fig = document.getElementById(id_down_fig);
-                                            fig.parentNode.removeChild(fig);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            id_place[x0_coord][y0_coord] = 0;
-                                            bd[x0_coord][y0_coord] = 0;
-                                            moveTo(e)
-                                        }else{
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
-                                        }
-                                    
-                                    }else if (bd[x0_coord][y0_coord] % 6 == 5){
-                                        //проверяем может ли эту фигуру съесть ферзь
-                                        console.log('ферзь');
-                                        if ((is_figure_on_diagline(x_coord,y_coord,x0_coord,y0_coord,bd) == true) && ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true)){
-                                            //съедаем фигуру и занимаем ее место
-                                            var id_down_fig = id_place[x_coord][y_coord];
-                                            fig = document.getElementById(id_down_fig);
-                                            fig.parentNode.removeChild(fig);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            id_place[x0_coord][y0_coord] = 0;
-                                            bd[x0_coord][y0_coord] = 0;
-                                            moveTo(e)
-                                        }else{
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
-                                        }
-                                    
-                                    }else if(bd[x0_coord][y0_coord] % 6 == 0) {//Короли
-                                        //хмм
-                                        console.log('король');
-                                        //съедаем фигуру если она другого цвета и занимаем ее место
-                                        var id_down_fig = id_place[x_coord][y_coord];
-                                        fig = document.getElementById(id_down_fig);
-                                        fig.parentNode.removeChild(fig);
-                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                        id_place[x0_coord][y0_coord] = 0;
-                                        bd[x0_coord][y0_coord] = 0;
-                                        moveTo(e)
-                                    }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
-                                        //стоит ли между пешкой и фигурой другая фигура
-                                        if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
-                                            console.log('пешка');
+                                            console.log('this is ladya',x_coord,y_coord,x0_coord,y0_coord,bd,(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)));
+                                            if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
+                                                //съедаем фигуру  и занимаем ее место
+                                                var id_down_fig = id_place[x_coord][y_coord];
+                                                fig = document.getElementById(id_down_fig);
+                                                fig.parentNode.removeChild(fig);
+                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                                id_place[x0_coord][y0_coord] = 0;
+                                                bd[x0_coord][y0_coord] = 0;
+                                                moveTo(e)
+                                            }else{
+                                                console.log('tut');
+                                                elements[i].style.left = first_coorx;
+                                                elements[i].style.top = first_coory;
+                                            }
+                                        }else if (bd[x0_coord][y0_coord] % 6 == 2){
+                                            //проверяем может ли эту фигуру съесть слон
+                                            console.log('this is slon');
+                                            if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
+                                                //съедаем фигуру и занимаем ее место
+                                                var id_down_fig = id_place[x_coord][y_coord];
+                                                fig = document.getElementById(id_down_fig);
+                                                fig.parentNode.removeChild(fig);
+                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                                id_place[x0_coord][y0_coord] = 0;
+                                                bd[x0_coord][y0_coord] = 0;
+                                                moveTo(e)
+                                            }else{
+                                                elements[i].style.left = first_coorx;
+                                                elements[i].style.top = first_coory;
+                                            }
+                                        
+                                        }else if (bd[x0_coord][y0_coord] % 6 == 5){
+                                            //проверяем может ли эту фигуру съесть ферзь
+                                            console.log('ферзь');
+                                            if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
+                                                //съедаем фигуру и занимаем ее место
+                                                var id_down_fig = id_place[x_coord][y_coord];
+                                                fig = document.getElementById(id_down_fig);
+                                                fig.parentNode.removeChild(fig);
+                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                                id_place[x0_coord][y0_coord] = 0;
+                                                bd[x0_coord][y0_coord] = 0;
+                                                moveTo(e)
+                                            }else{
+                                                console.log('tut2');
+                                                elements[i].style.left = first_coorx;
+                                                elements[i].style.top = first_coory;
+                                            }
+                                        
+                                        }else if(bd[x0_coord][y0_coord] % 6 == 0) {//Короли
+                                            //хмм
+                                            console.log('король');
                                             //съедаем фигуру если она другого цвета и занимаем ее место
                                             var id_down_fig = id_place[x_coord][y_coord];
                                             fig = document.getElementById(id_down_fig);
@@ -276,27 +283,47 @@
                                             id_place[x0_coord][y0_coord] = 0;
                                             bd[x0_coord][y0_coord] = 0;
                                             moveTo(e)
-                                        }else{
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
+                                        }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
+                                            //стоит ли между пешкой и фигурой другая фигура
+                                            if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
+                                                console.log('пешка');
+                                                //съедаем фигуру если она другого цвета и занимаем ее место
+                                                var id_down_fig = id_place[x_coord][y_coord];
+                                                fig = document.getElementById(id_down_fig);
+                                                fig.parentNode.removeChild(fig);
+                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                                id_place[x0_coord][y0_coord] = 0;
+                                                bd[x0_coord][y0_coord] = 0;
+                                                moveTo(e)
+                                            }else{
+                                                console.log('tut1');
+                                                elements[i].style.left = first_coorx;
+                                                elements[i].style.top = first_coory;
+                                            }
+                                                
+                                        }else if (bd[x0_coord][y0_coord] % 6 == 3){//это конь
+                                            console.log('конь');
+                                            var id_down_fig = id_place[x_coord][y_coord];
+                                            fig = document.getElementById(id_down_fig);
+                                            fig.parentNode.removeChild(fig);
+                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
+                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            id_place[x0_coord][y0_coord] = 0;
+                                            bd[x0_coord][y0_coord] = 0;
+                                            moveTo(e)
                                         }
-                                            
-                                    }else if (bd[x0_coord][y0_coord] % 6 == 1){//это конь
-                                        console.log('конь');
-                                        var id_down_fig = id_place[x_coord][y_coord];
-                                        fig = document.getElementById(id_down_fig);
-                                        fig.parentNode.removeChild(fig);
-                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                        id_place[x0_coord][y0_coord] = 0;
-                                        bd[x0_coord][y0_coord] = 0;
-                                        moveTo(e)
-                                    }
-                                    
-                                    
+                                        
+                                        
 
-                                    
+                                        
+                                    }else{
+                                        console.log('prikol');
+                                        elements[i].style.left = first_coorx;
+                                        elements[i].style.top = first_coory;
+                                    }
                                 }else{
+                                    console.log('prikol');
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
                                 }
@@ -307,7 +334,7 @@
                         }
                     elements[i].ondragstart = function() {
                         return false;
-                    };   
+                    }  
     
                 }
     
