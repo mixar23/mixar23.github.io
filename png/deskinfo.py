@@ -1,0 +1,1 @@
+#1st variant ~700 lines of code

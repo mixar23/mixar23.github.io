@@ -126,23 +126,14 @@
     
     
                             //проверка что конечные координаты находятся на доске
-                            if (div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 > 879){
+                            if ((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 > 879)||(div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 < 439)){
                                 elements[i].style.left = first_coorx;
                                 elements[i].style.top = first_coory;
     
-                            }else if(div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 < 439){
+                            }else if((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 > 504)||(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 < 104)){
                                 elements[i].style.left = first_coorx;
                                 elements[i].style.top = first_coory;
     
-                            }else if(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 > 504){
-                                elements[i].style.left = first_coorx;
-                                elements[i].style.top = first_coory;
-    
-                            }else if(div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 < 104){
-                                elements[i].style.left = first_coorx;
-                                elements[i].style.top = first_coory;
-                            
-                            //ready block
                             }else if (bd[x_coord][y_coord] == 0){
                                 // если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
@@ -152,11 +143,7 @@
                                         console.log('это ладья');
                                         if(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                             moveTo(e);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -165,11 +152,7 @@
                                         console.log('это слон');
                                         if(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                             moveTo(e);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -179,11 +162,7 @@
                                         console.log('это ферзь');
                                         if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
                                             moveTo(e);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -195,12 +174,7 @@
                                             elements[i].style.top = first_coory;
                                         }else{
                                             moveTo(e);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            sound.play();
-                                            w_b_step += 1;
-                                            console.log(x_coord,y_coord,x0_coord,y0_coord);
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }
                                         //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
@@ -209,20 +183,12 @@
                                             elements[i].style.top = first_coory;
                                         }else{
                                             moveTo(e);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }
                                     }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
                                         console.log('конь or король');
                                         moveTo(e);
-                                        bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                        id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                        sound.play();
-                                        w_b_step += 1;
-                                        step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                        move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                     }
                                 }else{
                                     elements[i].style.left = first_coorx;
@@ -241,17 +207,10 @@
                                             console.log('this is ladya',x_coord,y_coord,x0_coord,y0_coord,bd,(is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)));
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                                 //съедаем фигуру  и занимаем ее место
-                                                var id_down_fig = id_place[x_coord][y_coord];
-                                                fig = document.getElementById(id_down_fig);
+                                                fig = document.getElementById(id_place[x_coord][y_coord]);
                                                 fig.parentNode.removeChild(fig);
-                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                                id_place[x0_coord][y0_coord] = 0;
-                                                bd[x0_coord][y0_coord] = 0;
-                                                moveTo(e)
-                                                sound.play();
-                                                w_b_step += 1;
-                                                step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                                move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                                moveTo(e);
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -261,17 +220,10 @@
                                             console.log('this is slon');
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
                                                 //съедаем фигуру и занимаем ее место
-                                                var id_down_fig = id_place[x_coord][y_coord];
-                                                fig = document.getElementById(id_down_fig);
+                                                fig = document.getElementById(id_place[x_coord][y_coord]);
                                                 fig.parentNode.removeChild(fig);
-                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                                id_place[x0_coord][y0_coord] = 0;
-                                                bd[x0_coord][y0_coord] = 0;
-                                                moveTo(e)
-                                                sound.play();
-                                                w_b_step += 1;
-                                                step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                                move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                                moveTo(e);
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -282,55 +234,32 @@
                                             console.log('ферзь');
                                             if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
                                                 //съедаем фигуру и занимаем ее место
-                                                var id_down_fig = id_place[x_coord][y_coord];
-                                                fig = document.getElementById(id_down_fig);
+                                                fig = document.getElementById(id_place[x_coord][y_coord]);
                                                 fig.parentNode.removeChild(fig);
-                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                                id_place[x0_coord][y0_coord] = 0;
-                                                bd[x0_coord][y0_coord] = 0;
-                                                moveTo(e)
-                                                sound.play();
-                                                w_b_step += 1;
-                                                step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                                move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                                moveTo(e);
                                             }else{
-                                                console.log('tut2');
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
                                             }
                                         
                                         }else if(bd[x0_coord][y0_coord] % 6 == 0) {//Короли
-                                            //хмм
                                             console.log('король');
                                             //съедаем фигуру если она другого цвета и занимаем ее место
-                                            var id_down_fig = id_place[x_coord][y_coord];
-                                            fig = document.getElementById(id_down_fig);
+                                            fig = document.getElementById(id_place[x_coord][y_coord]);
                                             fig.parentNode.removeChild(fig);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            id_place[x0_coord][y0_coord] = 0;
-                                            bd[x0_coord][y0_coord] = 0;
-                                            moveTo(e)
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                            move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                            moveTo(e);
 
                                         }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
                                             //стоит ли между пешкой и фигурой другая фигура
                                             if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
                                                 console.log('пешка');
                                                 //съедаем фигуру если она другого цвета и занимаем ее место
-                                                var id_down_fig = id_place[x_coord][y_coord];
-                                                fig = document.getElementById(id_down_fig);
+                                                fig = document.getElementById(id_place[x_coord][y_coord]);
                                                 fig.parentNode.removeChild(fig);
-                                                bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                                id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                                id_place[x0_coord][y0_coord] = 0;
-                                                bd[x0_coord][y0_coord] = 0;
-                                                moveTo(e)
-                                                sound.play();
-                                                w_b_step += 1;
-                                                step_shine(x_coord,y_coord,x0_coord,y0_coord);
+                                                move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                                moveTo(e);
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -338,22 +267,11 @@
                                                 
                                         }else if (bd[x0_coord][y0_coord] % 6 == 3){//это конь
                                             console.log('конь');
-                                            var id_down_fig = id_place[x_coord][y_coord];
-                                            fig = document.getElementById(id_down_fig);
+                                            fig = document.getElementById(id_place[x_coord][y_coord]);
                                             fig.parentNode.removeChild(fig);
-                                            bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
-                                            id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            id_place[x0_coord][y0_coord] = 0;
-                                            bd[x0_coord][y0_coord] = 0;
-                                            moveTo(e)
-                                            sound.play();
-                                            w_b_step += 1;
-                                            step_shine(x_coord,y_coord,x0_coord,y0_coord);
-                                        }
-                                        
-                                        
-
-                                        
+                                            move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
+                                            moveTo(e);
+                                        }     
                                     }else{
                                         elements[i].style.left = first_coorx;
                                         elements[i].style.top = first_coory;
@@ -362,11 +280,9 @@
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
                                 }
-                                
-    
                             }
                         }
-                        }
+                    }
                     elements[i].ondragstart = function() {
                         return false;
                     }  
