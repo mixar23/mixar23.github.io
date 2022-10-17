@@ -71,13 +71,16 @@
                 
                 // где физически находятся id фигур
                 var id_place = [["chess_figure_5_b","chess_figure_4_b","chess_figure_2_b","chess_figure_3_b","chess_figure_1_b","chess_figure_15_b","chess_figure_16_b","chess_figure_14_b"],["chess_figure_6_b","chess_figure_7_b","chess_figure_8_b","chess_figure_9_b","chess_figure_10_b","chess_figure_11_b","chess_figure_12_b","chess_figure_13_b"],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],["chess_figure_6","chess_figure_7","chess_figure_8","chess_figure_9","chess_figure_10","chess_figure_11","chess_figure_12","chess_figure_13"],["chess_figure_5","chess_figure_4","chess_figure_2","chess_figure_3","chess_figure_1","chess_figure_15","chess_figure_16","chess_figure_14"]];
-    
+                var w_b_step = 0;
                 for (let i = 0;i < 32;i++){
                     sound = document.getElementById('step');
-                    
                     elements[i] = document.getElementById(ids[i]);
                     elements[i].onmousedown = function(e) {
-    
+
+                        if (((w_b_step % 2 == 0)&&(i > 15))||((w_b_step % 2 == 1)&&(i <= 15))){
+                            return;
+                        }
+                        
                         //определим координаты квадрата начала движения
                         var y0_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
                         var x0_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);
@@ -146,6 +149,7 @@
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                             sound.play();
+                                            w_b_step += 1;
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -157,6 +161,7 @@
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                             sound.play();
+                                            w_b_step += 1;
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -169,6 +174,7 @@
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                             sound.play();
+                                            w_b_step += 1;
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -183,6 +189,7 @@
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                             sound.play();
+                                            w_b_step += 1;
                                         }
                                         //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
@@ -194,6 +201,7 @@
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                             sound.play();
+                                            w_b_step += 1;
                                         }
                                     }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
                                         console.log('конь or король');
@@ -201,6 +209,7 @@
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
                                         sound.play();
+                                        w_b_step += 1;
                                     }
                                 }else{
                                     elements[i].style.left = first_coorx;
@@ -228,6 +237,7 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                                 sound.play();
+                                                w_b_step += 1;
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -246,6 +256,7 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                                 sound.play();
+                                                w_b_step += 1;
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -265,6 +276,7 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                                 sound.play();
+                                                w_b_step += 1;
                                             }else{
                                                 console.log('tut2');
                                                 elements[i].style.left = first_coorx;
@@ -284,6 +296,7 @@
                                             bd[x0_coord][y0_coord] = 0;
                                             moveTo(e)
                                             sound.play();
+                                            w_b_step += 1;
                                         }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
                                             //стоит ли между пешкой и фигурой другая фигура
                                             if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
@@ -298,6 +311,7 @@
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
                                                 sound.play();
+                                                w_b_step += 1;
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -314,6 +328,7 @@
                                             bd[x0_coord][y0_coord] = 0;
                                             moveTo(e)
                                             sound.play();
+                                            w_b_step += 1;
                                         }
                                         
                                         
