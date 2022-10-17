@@ -17,7 +17,8 @@
     </div>
         <div class = 'desk'>
             <p><img src= 'png/desk.png' alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
-        </div>  
+        </div> 
+            <audio id="step" src="sounds/step.mp3" preload="auto"></audio> 
 
             <img src=  'png/w_figures/chess.1.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_1"/> 
             <img src=  'png/w_figures/chess.2.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_2"/>
@@ -72,6 +73,7 @@
                 var id_place = [["chess_figure_5_b","chess_figure_4_b","chess_figure_2_b","chess_figure_3_b","chess_figure_1_b","chess_figure_15_b","chess_figure_16_b","chess_figure_14_b"],["chess_figure_6_b","chess_figure_7_b","chess_figure_8_b","chess_figure_9_b","chess_figure_10_b","chess_figure_11_b","chess_figure_12_b","chess_figure_13_b"],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],["chess_figure_6","chess_figure_7","chess_figure_8","chess_figure_9","chess_figure_10","chess_figure_11","chess_figure_12","chess_figure_13"],["chess_figure_5","chess_figure_4","chess_figure_2","chess_figure_3","chess_figure_1","chess_figure_15","chess_figure_16","chess_figure_14"]];
     
                 for (let i = 0;i < 32;i++){
+                    sound = document.getElementById('step');
                     
                     elements[i] = document.getElementById(ids[i]);
                     elements[i].onmousedown = function(e) {
@@ -104,6 +106,7 @@
                             moveAt(e);
                         }
                         elements[i].onmouseup = function(e) {
+                            
                             document.onmousemove = null;
 
                             elements[i].onmouseup = null;
@@ -142,7 +145,7 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-                                            console.log('uspeh@!!!@');
+                                            sound.play();
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -153,6 +156,7 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            sound.play();
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -164,6 +168,7 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                            sound.play();
                                         }else{
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
@@ -177,7 +182,7 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-
+                                            sound.play();
                                         }
                                         //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
@@ -188,13 +193,14 @@
                                             moveTo(e);
                                             bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                             id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
-
+                                            sound.play();
                                         }
                                     }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
                                         console.log('конь or король');
                                         moveTo(e);
                                         bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
                                         id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
+                                        sound.play();
                                     }
                                 }else{
                                     elements[i].style.left = first_coorx;
@@ -221,6 +227,7 @@
                                                 id_place[x0_coord][y0_coord] = 0;
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
+                                                sound.play();
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -238,6 +245,7 @@
                                                 id_place[x0_coord][y0_coord] = 0;
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
+                                                sound.play();
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -256,6 +264,7 @@
                                                 id_place[x0_coord][y0_coord] = 0;
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
+                                                sound.play();
                                             }else{
                                                 console.log('tut2');
                                                 elements[i].style.left = first_coorx;
@@ -274,6 +283,7 @@
                                             id_place[x0_coord][y0_coord] = 0;
                                             bd[x0_coord][y0_coord] = 0;
                                             moveTo(e)
+                                            sound.play();
                                         }else if(bd[x0_coord][y0_coord] % 6 == 1) {//Пешка
                                             //стоит ли между пешкой и фигурой другая фигура
                                             if ((y0_coord != y_coord)&&(steps[x_coord][y_coord] == 1)){
@@ -287,6 +297,7 @@
                                                 id_place[x0_coord][y0_coord] = 0;
                                                 bd[x0_coord][y0_coord] = 0;
                                                 moveTo(e)
+                                                sound.play();
                                             }else{
                                                 elements[i].style.left = first_coorx;
                                                 elements[i].style.top = first_coory;
@@ -302,18 +313,17 @@
                                             id_place[x0_coord][y0_coord] = 0;
                                             bd[x0_coord][y0_coord] = 0;
                                             moveTo(e)
+                                            sound.play();
                                         }
                                         
                                         
 
                                         
                                     }else{
-                                        console.log('prikol');
                                         elements[i].style.left = first_coorx;
                                         elements[i].style.top = first_coory;
                                     }
                                 }else{
-                                    console.log('prikol');
                                     elements[i].style.left = first_coorx;
                                     elements[i].style.top = first_coory;
                                 }
