@@ -4,10 +4,25 @@ head{
 body{
     background-color: brown;
 }
+#cur_step{
+    left :5000px;
+    top :1000px;
+    position: absolute;
+    z-index :1000px;
+    opacity :0.5;
+}
+#cur_step2{
+    left :5000px;
+    top :1000px;
+    position: absolute;
+    z-index :1000px;
+    opacity :0.5;
+}
 .desk{
     position :absolute;
     left :435px;
     top :80px;
+    z-index : -100;
 }
 
 #chess_figure_10{

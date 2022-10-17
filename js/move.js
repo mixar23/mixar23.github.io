@@ -2,6 +2,20 @@ var deafault_board = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0
 
 
 
+function step_shine(y,x,y1,x1){
+    x = 462 + x * 55;
+    y = 105 + y * 55;
+    x1 = 462 + x1 * 55;
+    y1 = 105 + y1 * 55;
+    console.log(x,y,x1,y1);
+    step_color.style.top = y + 'px';
+    step_color.style.left = x + 'px';
+    step_color2.style.top = y1 + 'px';
+    step_color2.style.left = x1 + 'px';
+
+}
+
+
 function changepos(x,y,x1,y1,board_in){
     var board = board_in;
     board[x1][y1] = board[x][y];
