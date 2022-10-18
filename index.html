@@ -15,9 +15,11 @@
         <a class="navbar-brand">Просто</a>
         <a class="navbar-brand">Главная</a>
     </div>
+    
         <div class = 'desk'>
             <p><img src= 'png/desk.png' alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
-        </div> 
+        </div>
+
             <audio id="step" src="sounds/step.mp3" preload="auto"></audio> 
             <img src = 'png/step.jpg' width = 55 height = 55 id = 'cur_step2'/>
             <img src = 'png/step.jpg' width = 55 height = 55 id = 'cur_step'/>
@@ -57,8 +59,13 @@
             <img src=  'png/b_figures/chess.2.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_15_b"/>
             <img src=  'png/b_figures/chess.4.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_16_b"/>
             
-    
-    
+            <p id="reset_w">reset</p>
+            <p1><button onclick="Function_reset()"><img src="png/restart.png" width="80" height="80"></button>
+            </p1>
+
+
+            
+
             <script type = 'text/javascript' src = "js/move.js">
                 
             </script>
@@ -290,6 +297,7 @@
                 }
     
             </script></p>
+            <script type = 'text/javascript' src = "js/reset.js" ></script>
 
 </body>
 </html>

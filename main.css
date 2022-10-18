@@ -4,6 +4,13 @@ head{
 body{
     background-color: brown;
 }
+button{
+    border-radius: 0%;
+}
+#reset_w{
+    left: 50px;
+    position: relative;
+}
 #cur_step{
     left :5000px;
     top :1000px;
@@ -54,7 +61,7 @@ body{
 #chess_figure_11{
     position :absolute;
     top :434px;
-    left :735px;
+    left :737px;
 }
 #chess_figure_13{
     position :absolute;
