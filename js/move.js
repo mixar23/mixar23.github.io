@@ -9,6 +9,11 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     bd[x0_coord][y0_coord] = 0;
     sound.play();//звук хода
     w_b_step += 1;//кто ходит
+    if (w_b_step % 2 == 0){
+        step_text.innerHTML = "white's turn";
+    }else{
+        step_text.innerHTML = "black's turn";
+    }
     step_shine(x_coord,y_coord,x0_coord,y0_coord);
 }
 
@@ -18,6 +23,11 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     id_place = changepos(x0_coord,y0_coord,x_coord,y_coord,id_place);
     sound.play();//звук хода 
     w_b_step += 1;//кто ходит
+    if (w_b_step % 2 == 0){
+        step_text.innerHTML = "white's turn";
+    }else{
+        step_text.innerHTML = "black's turn";
+    }
     step_shine(x_coord,y_coord,x0_coord,y0_coord);
 }
 

@@ -7,9 +7,15 @@ body{
 button{
     border-radius: 0%;
 }
+h1{
+    text-align: center;
+    position: relative;
+    top: -20px;
+}
 #reset_w{
     left: 50px;
-    position: relative;
+    position: absolute;
+    border: 2px solid #4CAF50;
 }
 #cur_step{
     left :5000px;
@@ -103,7 +109,7 @@ button{
 #chess_figure_15{
     position :absolute;
     top :488px;
-    left :735px;
+    left :737px;
 }
 #chess_figure_16{
     position :absolute;
@@ -172,7 +178,7 @@ button{
 #chess_figure_11_b{
     position :absolute;
     top :159px;
-    left :735px;
+    left :737px;
 }
 #chess_figure_12_b{
     position :absolute;
@@ -188,7 +194,7 @@ button{
 #chess_figure_15_b{
     position :absolute;
     top :104px;
-    left :735px;
+    left :737px;
 }
 #chess_figure_16_b{
     position :absolute;

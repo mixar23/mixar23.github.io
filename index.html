@@ -59,28 +59,27 @@
             <img src=  'png/b_figures/chess.2.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_15_b"/>
             <img src=  'png/b_figures/chess.4.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_16_b"/>
             
-            <p id="reset_w">reset</p>
-            <p1><button onclick="Function_reset()"><img src="png/restart.png" width="80" height="80"></button>
+
+            <h1 id = 'text_change'>white's turn</h1>
+            <p1>
+                <button onclick="Function_reset()"><img src="png/restart.png" width="80" height="80"></button>
             </p1>
-
-
             
 
-            <script type = 'text/javascript' src = "js/move.js">
-                
+            <script
+                type = 'text/javascript' src = "js/move.js">
             </script>
     
             <script type="text/javascript">
 
+                var step_text = document.getElementById('text_change');
                 var elements = [];
                 //base_desk:
                 var bd = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
                 var ids = ['chess_figure_1','chess_figure_2','chess_figure_3','chess_figure_4','chess_figure_5','chess_figure_6','chess_figure_7','chess_figure_8','chess_figure_9','chess_figure_10','chess_figure_11','chess_figure_12','chess_figure_13','chess_figure_14','chess_figure_15','chess_figure_16','chess_figure_1_b','chess_figure_2_b','chess_figure_3_b','chess_figure_4_b','chess_figure_5_b','chess_figure_6_b','chess_figure_7_b','chess_figure_8_b','chess_figure_9_b','chess_figure_10_b','chess_figure_11_b','chess_figure_12_b','chess_figure_13_b','chess_figure_14_b','chess_figure_15_b','chess_figure_16_b'];
-                
                 // где физически находятся id фигур
                 var id_place = [["chess_figure_5_b","chess_figure_4_b","chess_figure_2_b","chess_figure_3_b","chess_figure_1_b","chess_figure_15_b","chess_figure_16_b","chess_figure_14_b"],["chess_figure_6_b","chess_figure_7_b","chess_figure_8_b","chess_figure_9_b","chess_figure_10_b","chess_figure_11_b","chess_figure_12_b","chess_figure_13_b"],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],["chess_figure_6","chess_figure_7","chess_figure_8","chess_figure_9","chess_figure_10","chess_figure_11","chess_figure_12","chess_figure_13"],["chess_figure_5","chess_figure_4","chess_figure_2","chess_figure_3","chess_figure_1","chess_figure_15","chess_figure_16","chess_figure_14"]];
                 var w_b_step = 0;
-
                 //подсветка передыдущего хода
                 var step_color = document.getElementById('cur_step');
                 var step_color2 = document.getElementById('cur_step2');
@@ -215,7 +214,8 @@
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                                 //съедаем фигуру  и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.parentNode.removeChild(fig);
+                                                fig.style.left = 2000 + 'px';
+                                                // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
                                             }else{
@@ -228,7 +228,8 @@
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
                                                 //съедаем фигуру и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.parentNode.removeChild(fig);
+                                                fig.style.left = 2000 + 'px';
+                                                // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
                                             }else{
@@ -242,7 +243,8 @@
                                             if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
                                                 //съедаем фигуру и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.parentNode.removeChild(fig);
+                                                fig.style.left = 2000 + 'px';
+                                                // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
                                             }else{
@@ -254,7 +256,8 @@
                                             console.log('король');
                                             //съедаем фигуру если она другого цвета и занимаем ее место
                                             fig = document.getElementById(id_place[x_coord][y_coord]);
-                                            fig.parentNode.removeChild(fig);
+                                            fig.style.left = 2000 + 'px';
+                                            // fig.parentNode.removeChild(fig);
                                             move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                             moveTo(e);
 
@@ -264,7 +267,8 @@
                                                 console.log('пешка');
                                                 //съедаем фигуру если она другого цвета и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.parentNode.removeChild(fig);
+                                                fig.style.left = 2000 + 'px';
+                                                // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
                                             }else{
@@ -275,7 +279,8 @@
                                         }else if (bd[x0_coord][y0_coord] % 6 == 3){//это конь
                                             console.log('конь');
                                             fig = document.getElementById(id_place[x_coord][y_coord]);
-                                            fig.parentNode.removeChild(fig);
+                                            fig.style.left = 2000 + 'px';
+                                            // fig.parentNode.removeChild(fig);
                                             move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                             moveTo(e);
                                         }     
