@@ -39,4 +39,6 @@ function Function_reset() {
     ybox2.style.left = 5000 + 'px';
     step_text.innerHTML = "white's turn";
     w_b_step = 0;
+    bd = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
+    id_place = [["chess_figure_5_b","chess_figure_4_b","chess_figure_2_b","chess_figure_3_b","chess_figure_1_b","chess_figure_15_b","chess_figure_16_b","chess_figure_14_b"],["chess_figure_6_b","chess_figure_7_b","chess_figure_8_b","chess_figure_9_b","chess_figure_10_b","chess_figure_11_b","chess_figure_12_b","chess_figure_13_b"],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],["chess_figure_6","chess_figure_7","chess_figure_8","chess_figure_9","chess_figure_10","chess_figure_11","chess_figure_12","chess_figure_13"],["chess_figure_5","chess_figure_4","chess_figure_2","chess_figure_3","chess_figure_1","chess_figure_15","chess_figure_16","chess_figure_14"]];
 }
