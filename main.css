@@ -2,7 +2,9 @@ head{
     background-color: blueviolet;
 }
 body{
-    background-color: brown;
+    background-image: url(png/background/back4.jpg); 
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 button{
     border-radius: 0%;
@@ -10,6 +12,7 @@ button{
 h1{
     text-align: center;
     position: relative;
+    color: #25ac2a;
     top: -20px;
 }
 #reset_w{
@@ -18,18 +21,18 @@ h1{
     border: 2px solid #4CAF50;
 }
 #cur_step{
-    left :5000px;
-    top :1000px;
+    left :1px;
+    top :1px;
     position: absolute;
     z-index :1000px;
-    opacity :0.5;
+    opacity :0.0;
 }
 #cur_step2{
-    left :5000px;
-    top :1000px;
+    left :1px;
+    top :1px;
     position: absolute;
     z-index :1000px;
-    opacity :0.5;
+    opacity :0.0;
 }
 .desk{
     position :absolute;

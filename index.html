@@ -71,7 +71,9 @@
             </script>
     
             <script type="text/javascript">
-
+                
+                var white_figs = 970;
+                var black_figs = 970;
                 var step_text = document.getElementById('text_change');
                 var elements = [];
                 //base_desk:
@@ -109,9 +111,7 @@
                             elements[i].style.left = e.pageX - elements[i].offsetWidth / 2 + 'px';
                             elements[i].style.top = e.pageY - elements[i].offsetHeight / 2 + 'px';
                         }
-                        function div(val, by){
-                                return (val - val % by) / by;
-                            }
+                        
                             //выравнивание по квадрату
                         function moveTo(e) {
                             elements[i].style.left = div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
@@ -214,7 +214,9 @@
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                                 //съедаем фигуру  и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.style.left = 2000 + 'px';
+                                                let left = move_broken(w_b_step)
+                                                fig.style.left = left[0] + 'px';
+                                                fig.style.top = left[1] + 'px';
                                                 // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
@@ -228,7 +230,9 @@
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)){
                                                 //съедаем фигуру и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.style.left = 2000 + 'px';
+                                                let left = move_broken(w_b_step)
+                                                fig.style.left = left[0] + 'px';
+                                                fig.style.top = left[1] + 'px';
                                                 // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
@@ -243,7 +247,9 @@
                                             if ((is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd)) == true){
                                                 //съедаем фигуру и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.style.left = 2000 + 'px';
+                                                let left = move_broken(w_b_step)
+                                                fig.style.left = left[0] + 'px';
+                                                fig.style.top = left[1] + 'px';
                                                 // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
@@ -256,7 +262,9 @@
                                             console.log('король');
                                             //съедаем фигуру если она другого цвета и занимаем ее место
                                             fig = document.getElementById(id_place[x_coord][y_coord]);
-                                            fig.style.left = 2000 + 'px';
+                                            let left = move_broken(w_b_step)
+                                            fig.style.left = left[0] + 'px';
+                                            fig.style.top = left[1] + 'px';
                                             // fig.parentNode.removeChild(fig);
                                             move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                             moveTo(e);
@@ -267,7 +275,9 @@
                                                 console.log('пешка');
                                                 //съедаем фигуру если она другого цвета и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                fig.style.left = 2000 + 'px';
+                                                let left = move_broken(w_b_step)
+                                                fig.style.left = left[0] + 'px';
+                                                fig.style.top = left[1] + 'px';
                                                 // fig.parentNode.removeChild(fig);
                                                 move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                                 moveTo(e);
@@ -279,7 +289,9 @@
                                         }else if (bd[x0_coord][y0_coord] % 6 == 3){//это конь
                                             console.log('конь');
                                             fig = document.getElementById(id_place[x_coord][y_coord]);
-                                            fig.style.left = 2000 + 'px';
+                                            let left = move_broken(w_b_step)
+                                            fig.style.left = left[0] + 'px';
+                                            fig.style.top = left[1] + 'px';
                                             // fig.parentNode.removeChild(fig);
                                             move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place);
                                             moveTo(e);

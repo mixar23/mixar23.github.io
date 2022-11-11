@@ -1,6 +1,8 @@
 //var deafault_board = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
 //шах
-
+function div(val, by){
+    return (val - val % by) / by;
+}
 
 function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     bd = changepos(x0_coord,y0_coord,x_coord,y_coord,bd);
@@ -15,6 +17,21 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
         step_text.innerHTML = "black's turn";
     }
     step_shine(x_coord,y_coord,x0_coord,y0_coord);
+    ybox = document.getElementById('cur_step');
+    ybox.style.opacity = 0.5;
+    ybox2 = document.getElementById('cur_step2');
+    ybox2.style.opacity = 0.5;
+}
+function move_broken(w_b_step){
+    if (w_b_step % 2 == 1){
+        var res = [white_figs - 385 * div(white_figs % 970,332),104 + 55 * div(white_figs % 970,332)]
+        white_figs += 55;
+    }else{
+        var res = [black_figs - 385 * div(black_figs % 970,332),434 + 55 *div(black_figs % 970,332)]
+        black_figs += 55   
+    }
+    console.log('get',res);
+    return res
 }
 
 //Передвижение клетки на свободное место
@@ -29,6 +46,10 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
         step_text.innerHTML = "black's turn";
     }
     step_shine(x_coord,y_coord,x0_coord,y0_coord);
+    ybox = document.getElementById('cur_step');
+    ybox.style.opacity = 0.5;
+    ybox2 = document.getElementById('cur_step2');
+    ybox2.style.opacity = 0.5;
 }
 
 //подсветка последнего хода

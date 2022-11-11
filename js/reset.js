@@ -34,9 +34,9 @@ function Function_reset() {
         left_s += 55;
     }
     ybox = document.getElementById('cur_step');
-    ybox.style.left = 5000 + 'px';
+    ybox.style.opacity = 0.0;
     ybox2 = document.getElementById('cur_step2');
-    ybox2.style.left = 5000 + 'px';
+    ybox2.style.opacity = 0.0;
     step_text.innerHTML = "white's turn";
     w_b_step = 0;
     bd = [[4,3,2,5,6,2,3,4],[1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[7,7,7,7,7,7,7,7],[10,9,8,11,12,8,9,10]];
