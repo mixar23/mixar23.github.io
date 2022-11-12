@@ -24,11 +24,11 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
 }
 function move_broken(w_b_step){
     if (w_b_step % 2 == 1){
-        var res = [white_figs - 385 * div(white_figs % 970,332),104 + 55 * div(white_figs % 970,332)]
-        white_figs += 55;
+        var res = [970 + 55 * (white_figs % 7),104 + 55 * div(white_figs,7)]
+        white_figs += 1;
     }else{
-        var res = [black_figs - 385 * div(black_figs % 970,332),434 + 55 *div(black_figs % 970,332)]
-        black_figs += 55   
+        var res = [970 + 55 * (black_figs % 7),434 + 55 *div(black_figs,7)]
+        black_figs += 1;  
     }
     console.log('get',res);
     return res
