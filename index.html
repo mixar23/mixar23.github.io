@@ -135,11 +135,12 @@
                         elements[i].style.position = 'absolute';
                         var first_coorx = div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
                         var first_coory = div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 + 'px';
-                        show_p(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
+                        
                         console.log(first_coorx,first_coory);
                         moveAt(e);
                         document.body.appendChild(elements[i]);
                         elements[i].style.zIndex = 100;
+                        show_p(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                         function moveAt(e) {
                             elements[i].style.left = e.pageX - elements[i].offsetWidth / 2 + 'px';
                             elements[i].style.top = e.pageY - elements[i].offsetHeight / 2 + 'px';
