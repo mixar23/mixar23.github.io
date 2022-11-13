@@ -11,10 +11,6 @@
 </head>
 
 <body>
-    <div class="container">
-        <a class="navbar-brand">Просто</a>
-        <a class="navbar-brand">Главная</a>
-    </div>
     
         <div class = 'desk'>
             <p><img src= 'png/desk.png' alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
@@ -74,6 +70,7 @@
                 
                 var white_figs = 0;//отслеживание съеденных фигур
                 var black_figs = 0;//отслеживание съеденных фигур
+                var last_step = [];
                 var step_text = document.getElementById('text_change');
                 var elements = [];
                 //base_desk:
@@ -173,18 +170,38 @@
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }
-                                        //белая пешка
+                                    //белая пешка
                                     }else if (bd[x0_coord][y0_coord] == 7){
-                                        if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)){
+                                        if (((last_step == 1,y0_coord+1,3,y0_coord+1)||(last_step == 1,y0_coord-1,3,y0_coord-1)) && (x0_coord == 3) && (last_step[1] == y_coord)){
+                                            moveTo(e);
+                                            fig = document.getElementById(id_place[x0_coord][y_coord]);
+                                            let left = move_broken(w_b_step);
+                                            fig.style.left = left[0] + 'px';
+                                            fig.style.top = left[1] + 'px';
+                                            id_place[x0_coord][y_coord] = 0;
+                                            bd[x0_coord][y_coord] = 0;
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                            
+                                        }else if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)) {
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }else{
                                             moveTo(e);
                                             move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         }
-                                        //черная пешка
+                                    //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
-                                        if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
+                                        if (((last_step == 6,y0_coord+1,4,y0_coord+1)||(last_step == 6,y0_coord-1,4,y0_coord-1)) && (x0_coord == 3) && (last_step[1] == y_coord)){
+                                            moveTo(e);
+                                            fig = document.getElementById(id_place[x0_coord][y_coord]);
+                                            let left = move_broken(w_b_step);
+                                            fig.style.left = left[0] + 'px';
+                                            fig.style.top = left[1] + 'px';
+                                            id_place[x0_coord][y_coord] = 0;
+                                            bd[x0_coord][y_coord] = 0;
+                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                        }  
+                                        else if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
                                             elements[i].style.left = first_coorx;
                                             elements[i].style.top = first_coory;
                                         }else{
@@ -214,7 +231,7 @@
                                             if (is_figure_on_line(x_coord,y_coord,x0_coord,y0_coord,bd) == true){
                                                 //съедаем фигуру  и занимаем ее место
                                                 fig = document.getElementById(id_place[x_coord][y_coord]);
-                                                let left = move_broken(w_b_step)
+                                                let left = move_broken(w_b_step);
                                                 fig.style.left = left[0] + 'px';
                                                 fig.style.top = left[1] + 'px';
                                                 // fig.parentNode.removeChild(fig);

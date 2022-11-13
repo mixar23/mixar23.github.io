@@ -21,6 +21,8 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     ybox.style.opacity = 0.5;
     ybox2 = document.getElementById('cur_step2');
     ybox2.style.opacity = 0.5;
+    last_step = [x0_coord,y0_coord,x_coord,y_coord];
+    console.log(last_step);
 }
 function move_broken(w_b_step){
     if (w_b_step % 2 == 1){
@@ -50,6 +52,8 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     ybox.style.opacity = 0.5;
     ybox2 = document.getElementById('cur_step2');
     ybox2.style.opacity = 0.5;
+    last_step = [x0_coord,y0_coord,x_coord,y_coord];
+    console.log(last_step);
 }
 
 //подсветка последнего хода
@@ -211,6 +215,7 @@ function can_move_to(x,y,fig){
                 }
             }
         }
+        //черные пешки
         if (fig == 1){
             if (x != 7){
                 for (let i = y - 1;i <= y + 1;i++){
@@ -222,8 +227,13 @@ function can_move_to(x,y,fig){
             }
             if (x == 1){
                 blocks[x+2][y] = 1;
-            }    
+            }
+            // if ((last_step == [x-2,y+1,x,y+1])||(last_step == [x-2,y-1,x,y-1])) {
+            //     blocks[x+1][last_step[1]] = 1;
+            //     console.log('her');
+            // } 
         }
+        //белые пешки
         if (fig == 7){
             if (x != 0){
                 for (let i = y - 1;i <= y + 1;i++){
@@ -232,6 +242,11 @@ function can_move_to(x,y,fig){
                     }   
                 }
             }
+            // if ((last_step == x-2,y+1,x,y+1)||(last_step == x-2,y-1,x,y-1)) {
+            //     blocks[x-1][last_step[1]] = 1;
+                
+            // } 
+            console.log('blocki= ',blocks);
             if (x == 6){
                 blocks[x-2][y] = 1;    
             }
