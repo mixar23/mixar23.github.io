@@ -139,7 +139,7 @@
                         console.log(first_coorx,first_coory);
                         moveAt(e);
                         document.body.appendChild(elements[i]);
-                        elements[i].style.zIndex = 100;
+                        elements[i].style.zIndex = 120;
                         show_p(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                         function moveAt(e) {
                             elements[i].style.left = e.pageX - elements[i].offsetWidth / 2 + 'px';
@@ -161,6 +161,7 @@
                             
 
                             elements[i].onmouseup = null;
+                            elements[i].style.zIndex = 100;
                             //определим координаты квадрата окончания движения
                             var y_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
                             var x_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);

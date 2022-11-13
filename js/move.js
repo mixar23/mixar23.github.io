@@ -242,15 +242,11 @@ function can_move_to(x,y,fig){
                     }   
                 }
             }
-            // if ((last_step == x-2,y+1,x,y+1)||(last_step == x-2,y-1,x,y-1)) {
-            //     blocks[x-1][last_step[1]] = 1;
-                
-            // } 
-            console.log('blocki= ',blocks);
             if (x == 6){
                 blocks[x-2][y] = 1;    
             }
         }
+    console.log('step',blocks);
     return blocks;
 }
 
