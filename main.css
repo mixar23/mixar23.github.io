@@ -1,5 +1,5 @@
 body{
-    background-image: url(png/background/back4.jpg); 
+    background-image: url(png/background/back1.jpg); 
     background-size: cover;
 }
 button{
@@ -7,6 +7,13 @@ button{
     position: absolute;
     top: 45%;
     left: 320px;
+}
+.kkrug{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    opacity: 0;
+    z-index: 1200;
 }
 h1{
     text-align: center;
@@ -23,14 +30,14 @@ h1{
     left :1px;
     top :1px;
     position: absolute;
-    z-index :1000px;
+    z-index :0;
     opacity :0.0;
 }
 #cur_step2{
     left :1px;
     top :1px;
     position: absolute;
-    z-index :1000px;
+    z-index :0;
     opacity :0.0;
 }
 .desk{

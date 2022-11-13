@@ -75,7 +75,7 @@ function changepos(x,y,x1,y1,board_in){
     var board = board_in;
     board[x1][y1] = board[x][y];
     board[x][y] = 0;
-    return board;  
+    return board;
 }
 
 //возможные ходы по пустому полю из точки с координатами x y фигурой fig 

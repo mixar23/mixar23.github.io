@@ -16,9 +16,40 @@
             <p><img src= 'png/desk.png' alt="chess_desk" id = "chess_desk" widht = 496 height = 492/></p>
         </div>
 
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+            <img class = 'kkrug' src="png/krug.png"  width = 20 height = 20 alt="">
+
             <audio id="step" src="sounds/step.mp3" preload="auto"></audio> 
+            
             <img src = 'png/step.jpg' width = 55 height = 55 id = 'cur_step2'/>
             <img src = 'png/step.jpg' width = 55 height = 55 id = 'cur_step'/>
+            
             <img src=  'png/w_figures/chess.1.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_1"/> 
             <img src=  'png/w_figures/chess.2.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_2"/>
             <img src=  'png/w_figures/chess.3.png' width = 55 height = 55 alt="chess_figure" id = "chess_figure_3"/>
@@ -65,6 +96,9 @@
             <script
                 type = 'text/javascript' src = "js/move.js">
             </script>
+            <script
+                type = 'text/javascript' src = 'js/show_possible.js'>
+            </script>
     
             <script type="text/javascript">
                 
@@ -95,11 +129,13 @@
                         //определим координаты квадрата начала движения
                         var y0_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
                         var x0_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);
+                        
                         console.log('координаты начала: ',x0_coord,y0_coord);
     
                         elements[i].style.position = 'absolute';
                         var first_coorx = div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
                         var first_coory = div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 + 'px';
+                        show_p(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
                         console.log(first_coorx,first_coory);
                         moveAt(e);
                         document.body.appendChild(elements[i]);
@@ -119,12 +155,15 @@
                         }
                         elements[i].onmouseup = function(e) {
                             
+                            
                             document.onmousemove = null;
+                            
 
                             elements[i].onmouseup = null;
                             //определим координаты квадрата окончания движения
                             var y_coord = div((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22-461),55);
                             var x_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);
+                            clear_p();
                             console.log('координаты конца: ',x_coord,y_coord,bd);
     
     
@@ -324,10 +363,11 @@
                             }
                         }
                     }
+                    
                     elements[i].ondragstart = function() {
                         return false;
+                        
                     }  
-    
                 }
     
             </script></p>
