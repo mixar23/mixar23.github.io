@@ -228,10 +228,7 @@ function can_move_to(x,y,fig){
             if (x == 1){
                 blocks[x+2][y] = 1;
             }
-            // if ((last_step == [x-2,y+1,x,y+1])||(last_step == [x-2,y-1,x,y-1])) {
-            //     blocks[x+1][last_step[1]] = 1;
-            //     console.log('her');
-            // } 
+
         }
         //белые пешки
         if (fig == 7){
@@ -298,7 +295,7 @@ function is_figure_on_line(x,y,x0,y0,board){
         }
         return true;
     }else{
-        console.log('diagonal');
+        console.log('diagonal',x,y,x0,y0);
         var ind = x0;
         var lnd = y0;
         while((ind != x)&&(lnd != y)){
@@ -314,12 +311,12 @@ function is_figure_on_line(x,y,x0,y0,board){
                 ind--;
             }
             if (y >y0){
-                if(ind == y - 1){
+                if(lnd == y - 1){
                     return true;
                 }
                 lnd++;
             }else{
-                if(ind == y + 1){
+                if(lnd == y + 1){
                     return true;
                 }
                 lnd--;

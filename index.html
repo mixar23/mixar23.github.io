@@ -181,6 +181,9 @@
                             }else if (bd[x_coord][y_coord] == 0){
                                 // если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
+                                console.log('steppss=  ',steps)
+                                steps = pos_moves(x0_coord,y0_coord,bd[x0_coord][y0_coord],bd,steps)
+                                console.log('steppss=  ',steps)
                                 if(steps[x_coord][y_coord] == 1){
                                     //если ладья проверяем нет на линиях лишних фигур
                                     if((bd[x0_coord][y0_coord]  % 6 == 4)){
@@ -213,42 +216,39 @@
                                         }
                                     //белая пешка
                                     }else if (bd[x0_coord][y0_coord] == 7){
-                                        if (((last_step == 1,y0_coord+1,3,y0_coord+1)||(last_step == 1,y0_coord-1,3,y0_coord-1)) && (x0_coord == 3) && (last_step[1] == y_coord)){
-                                            moveTo(e);
-                                            fig = document.getElementById(id_place[x0_coord][y_coord]);
-                                            let left = move_broken(w_b_step);
+                                        // if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)) {
+                                        // elements[i].style.left = first_coorx;
+                                        // elements[i].style.top = first_coory;
+                                        // }else{
+                                        moveTo(e);
+                                        move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                        if (y0_coord != y_coord ){
+                                            fig = document.getElementById(id_place[x_coord + 1][y_coord]);
+                                            let left = move_broken(w_b_step - 1);
                                             fig.style.left = left[0] + 'px';
                                             fig.style.top = left[1] + 'px';
-                                            id_place[x0_coord][y_coord] = 0;
-                                            bd[x0_coord][y_coord] = 0;
-                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
-                                            
-                                        }else if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)) {
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
-                                        }else{
-                                            moveTo(e);
-                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                            id_place[x_coord + 1][y_coord] = 0;
+                                            bd[x_coord + 1][y_coord] = 0;
                                         }
+                                        // }
                                     //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
-                                        if (((last_step == 6,y0_coord+1,4,y0_coord+1)||(last_step == 6,y0_coord-1,4,y0_coord-1)) && (x0_coord == 3) && (last_step[1] == y_coord)){
-                                            moveTo(e);
-                                            fig = document.getElementById(id_place[x0_coord][y_coord]);
-                                            let left = move_broken(w_b_step);
+                                         
+                                        // if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
+                                        //     elements[i].style.left = first_coorx;
+                                        //     elements[i].style.top = first_coory;
+                                        // }else{
+                                        moveTo(e);
+                                        move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                        if (y0_coord != y_coord){
+                                            fig = document.getElementById(id_place[x_coord - 1][y_coord]);
+                                            let left = move_broken(w_b_step - 1);
                                             fig.style.left = left[0] + 'px';
                                             fig.style.top = left[1] + 'px';
-                                            id_place[x0_coord][y_coord] = 0;
-                                            bd[x0_coord][y_coord] = 0;
-                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
-                                        }  
-                                        else if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
-                                            elements[i].style.left = first_coorx;
-                                            elements[i].style.top = first_coory;
-                                        }else{
-                                            moveTo(e);
-                                            move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
+                                            id_place[x_coord - 1][y_coord] = 0;
+                                            bd[x_coord - 1][y_coord] = 0;
                                         }
+                                        // }
                                     }else if ((bd[x0_coord][y0_coord] % 6 == 3)||(bd[x0_coord][y0_coord] % 6 == 0)){
                                         console.log('конь or король');
                                         moveTo(e);
