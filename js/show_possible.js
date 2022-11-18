@@ -156,7 +156,7 @@ function pos_moves(x,y,fig,bd,res){
         }
     }
     //конь
-    if (fig % 6 == 3){
+    if ((fig % 6 == 3)||(fig % 6 == 0)) {
         for (let i = 0; i < res_mas.length;i++){
             let xc = res_mas[i][0]
             let yc = res_mas[i][1]
@@ -185,7 +185,15 @@ function pos_moves(x,y,fig,bd,res){
             }
         }
     }
-
+    // if( fig % 6 == 0){
+    //     for (let i = 0; i < res_mas.length;i++){
+    //         let xc = res_mas[i][0]
+    //         let yc = res_mas[i][1]
+    //         if ((div(bd[xc][yc],7) == div(fig,7))&&(bd[xc][yc] != 0)||!(is_figure_on_line(xc,yc,x,y,bd))){
+    //             res[xc][yc] = 0
+    //         }
+    //     }
+    // }
     res[x][y] = 0
     return res
 }
