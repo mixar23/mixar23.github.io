@@ -28,6 +28,7 @@ function pos_moves(x,y,fig,bd,res){
 
     //список координат точек
     var res_mas = get_coords(res)
+    console.log("ffff",res)
 
     // белые пешки
     if (fig == 7){
@@ -157,6 +158,7 @@ function pos_moves(x,y,fig,bd,res){
     }
     //конь
     if ((fig % 6 == 3)||(fig % 6 == 0)) {
+        console.log("here: ",res.mas)
         for (let i = 0; i < res_mas.length;i++){
             let xc = res_mas[i][0]
             let yc = res_mas[i][1]

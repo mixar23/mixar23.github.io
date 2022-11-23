@@ -99,29 +99,29 @@ function can_move_to(x,y,fig){
         }catch{
             console.log('-1_varxant');
         }
-        try{
+        if (x < 6 && y < 7){
             blocks[x+2][y+1] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }
-        try{
+        if (x < 6 && y > 0){
             blocks[x+2][y-1] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }
-        try{
+        if (x <  7 && y < 6){
             blocks[x+1][y+2] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }
-        try{
+        if (x < 7 && y > 1){
         blocks[x+1][y-2] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }
-        try{
+        if (x > 0 && y < 6){
             blocks[x-1][y+2] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }
         try{
@@ -129,9 +129,9 @@ function can_move_to(x,y,fig){
         }catch{
             console.log('-1_varxant');
         }
-        try{
+        if (x > 1 && y < 7){
             blocks[x-2][y+1] = 1;
-        }catch{
+        }else{
             console.log('-1_varxant');
         }        
     }
