@@ -91,7 +91,6 @@
             <p1>
                 <button onclick="Function_reset()"><img src="png/restart.png" width="80" height="80"></button>
             </p1>
-            
 
             <script
                 type = 'text/javascript' src = "js/move.js">
@@ -101,7 +100,12 @@
             </script>
     
             <script type="text/javascript">
-                
+                var w_king_steps = 0;//отслеживание ходил белый король иле нет
+                var b_king_steps = 0;//отслеживание ходил черный король или нет
+                var w_castles = [0,0];//отслеживание ходила ли белая ладья 
+                var b_castles = [0,0];//отслеживание ходила ли черная ладья 
+
+
                 var white_figs = 0;//отслеживание съеденных фигур
                 var black_figs = 0;//отслеживание съеденных фигур
                 var last_step = [];
@@ -181,9 +185,7 @@
                             }else if (bd[x_coord][y_coord] == 0){
                                 // если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
-                                console.log('steppss=  ',steps)
                                 steps = pos_moves(x0_coord,y0_coord,bd[x0_coord][y0_coord],bd,steps)
-                                console.log('steppss=  ',steps)
                                 if(steps[x_coord][y_coord] == 1){
                                     //если ладья проверяем нет на линиях лишних фигур
                                     if((bd[x0_coord][y0_coord]  % 6 == 4)){

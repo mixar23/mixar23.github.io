@@ -23,6 +23,27 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     ybox2.style.opacity = 0.5;
     last_step = [x0_coord,y0_coord,x_coord,y_coord];
     console.log(last_step);
+    //отслеживание есть ли возможность сделать рокировку
+    if(x0_coord == 7 && y0_coord == 4){
+        w_king_steps = 1
+    }
+    if(x0_coord == 0 && y0_coord == 4){
+        b_king_steps = 1
+    }
+    if((x0_coord == 7 && y0_coord == 0)||(x_coord == 7 && y_coord == 0)){
+        w_castles[0] = 1
+    }
+    if((x0_coord == 7 && y0_coord == 7)||(x_coord == 7 && y_coord == 7)){
+        w_castles[1] = 1
+    }
+
+    if((x0_coord == 0 && y0_coord == 0)||(x_coord == 0 && y_coord == 0)){
+        b_castles[0] = 1
+    }
+    if((x0_coord == 0 && y0_coord == 7)||(x_coord == 0 && y_coord == 7)){
+        b_castles[1] = 1
+    }
+
 }
 function move_broken(w_b_step){
     if (w_b_step % 2 == 1){
@@ -54,6 +75,69 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     ybox2.style.opacity = 0.5;
     last_step = [x0_coord,y0_coord,x_coord,y_coord];
     console.log(last_step);
+
+    //отслеживание есть ли возможность сделать рокировку
+    if(x0_coord == 7 && y0_coord == 4){
+        w_king_steps = 1
+    }
+    if(x0_coord == 0 && y0_coord == 4){
+        b_king_steps = 1
+    }
+    if(x0_coord == 7 && y0_coord == 0){
+        w_castles[0] = 1
+    }
+    if(x0_coord == 7 && y0_coord == 7){
+        w_castles[1] = 1
+    }
+
+    if(x0_coord == 0 && y0_coord == 0){
+        b_castles[0] = 1
+    }
+    if(x0_coord == 0 && y0_coord == 7){
+        b_castles[1] = 1
+    }
+
+
+    //проверка этого хода на рокировку
+    console.log(x0_coord,y0_coord,x_coord,y_coord,bd[x0_coord][y0_coord])
+    //белая рокировка
+    if(x0_coord == 7 && y0_coord == 4 && x_coord == 7 && y_coord == 6 && bd[x_coord][y_coord] == 12){
+        el = document.getElementById(id_place[7][7])
+        console.log("hereee",el)
+        bd = changepos(7,7,7,5,bd);
+        id_place = changepos(7,7,7,5,id_place);
+        el.style.left = 737 +"px"
+        el.style.top = 488 + "px"
+        
+    }
+    if(x0_coord == 7 && y0_coord == 4 && x_coord == 7 && y_coord == 2 && bd[x_coord][y_coord] == 12){
+        el = document.getElementById(id_place[7][0])
+        console.log("hereee",el)
+        bd = changepos(7,0,7,3,bd);
+        id_place = changepos(7,0,7,3,id_place);
+        el.style.left = 627 +"px"
+        el.style.top = 488 + "px"
+        
+    }
+    //черная рокировка
+    if(x0_coord == 0 && y0_coord == 4 && x_coord == 0 && y_coord == 6 && bd[x_coord][y_coord] == 6){
+        el = document.getElementById(id_place[0][7])
+        console.log("hereee",el)
+        bd = changepos(0,7,0,5,bd);
+        id_place = changepos(0,7,0,5,id_place);
+        el.style.left = 737 +"px"
+        el.style.top = 104 + "px"
+        
+    }
+    if(x0_coord == 0 && y0_coord == 4 && x_coord == 0 && y_coord == 2 && bd[x_coord][y_coord] == 6){
+        el = document.getElementById(id_place[0][0])
+        console.log("hereee",el)
+        bd = changepos(0,0,0,3,bd);
+        id_place = changepos(0,0,0,3,id_place);
+        el.style.left = 627 +"px"
+        el.style.top = 104 + "px"
+        
+    }
 }
 
 //подсветка последнего хода

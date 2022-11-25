@@ -156,9 +156,8 @@ function pos_moves(x,y,fig,bd,res){
             }
         }
     }
-    //конь
+    //конь и король
     if ((fig % 6 == 3)||(fig % 6 == 0)) {
-        console.log("here: ",res.mas)
         for (let i = 0; i < res_mas.length;i++){
             let xc = res_mas[i][0]
             let yc = res_mas[i][1]
@@ -166,6 +165,8 @@ function pos_moves(x,y,fig,bd,res){
                 res[xc][yc] = 0
             }
         }
+
+
     }
     // слон
     if ( fig % 6 == 2){
@@ -196,6 +197,22 @@ function pos_moves(x,y,fig,bd,res){
     //         }
     //     }
     // }
+    if(fig  == 12){
+          if (is_figure_on_line(7,7,7,4,bd)&& w_castles[1] == 0 && w_king_steps == 0){
+            res[7][6] = 1
+          }
+          if (is_figure_on_line(7,0,7,4,bd)&& w_castles[0] == 0 && w_king_steps == 0){
+            res[7][2] = 1
+          }
+    }
+    if(fig  == 6){
+        if (is_figure_on_line(0,7,0,4,bd) && b_castles[1] == 0 && b_king_steps == 0){
+          res[0][6] = 1
+        }
+        if (is_figure_on_line(0,0,0,4,bd) && b_castles[0] == 0 && b_king_steps == 0){
+          res[0][2] = 1
+        }
+    }
     res[x][y] = 0
     return res
 }
