@@ -139,8 +139,12 @@ function pos_moves(x,y,fig,bd,res){
                 }
             }            
         }
+        try{
         if ((x == 6)&&(bd[x + 1][y] != 0 || bd[x + 2][y] != 0)){
             res[x + 2][y] = 0;
+        }
+        }catch{
+            
         }
     }
 
