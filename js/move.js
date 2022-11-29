@@ -22,7 +22,6 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     ybox2 = document.getElementById('cur_step2');
     ybox2.style.opacity = 0.5;
     last_step = [x0_coord,y0_coord,x_coord,y_coord];
-    console.log(last_step);
     //отслеживание есть ли возможность сделать рокировку
     if(x0_coord == 7 && y0_coord == 4){
         w_king_steps = 1
@@ -43,6 +42,11 @@ function move_to_busy(x_coord,y_coord,x0_coord,y0_coord,bd,id_place){
     if((x0_coord == 0 && y0_coord == 7)||(x_coord == 0 && y_coord == 7)){
         b_castles[1] = 1
     }
+    if(bd[x_coord][y_coord] == 6){
+        b_k_coords = [x_coord,y_coord]
+    }else if(bd[x_coord][y_coord] == 12){
+        w_k_coords = [x_coord,y_coord]
+    }
 
 }
 function move_broken(w_b_step){
@@ -53,7 +57,6 @@ function move_broken(w_b_step){
         var res = [970 + 55 * (black_figs % 7),434 + 55 *div(black_figs,7)]
         black_figs += 1;  
     }
-    console.log('get',res);
     return res
 }
 
@@ -74,7 +77,11 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     ybox2 = document.getElementById('cur_step2');
     ybox2.style.opacity = 0.5;
     last_step = [x0_coord,y0_coord,x_coord,y_coord];
-    console.log(last_step);
+    if(bd[x_coord][y_coord] == 6){
+        b_k_coords = [x_coord,y_coord]
+    }else if(bd[x_coord][y_coord] == 12){
+        w_k_coords = [x_coord,y_coord]
+    }
 
     //отслеживание есть ли возможность сделать рокировку
     if(x0_coord == 7 && y0_coord == 4){
@@ -99,11 +106,9 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
 
 
     //проверка этого хода на рокировку
-    console.log(x0_coord,y0_coord,x_coord,y_coord,bd[x0_coord][y0_coord])
     //белая рокировка
     if(x0_coord == 7 && y0_coord == 4 && x_coord == 7 && y_coord == 6 && bd[x_coord][y_coord] == 12){
         el = document.getElementById(id_place[7][7])
-        console.log("hereee",el)
         bd = changepos(7,7,7,5,bd);
         id_place = changepos(7,7,7,5,id_place);
         el.style.left = 737 +"px"
@@ -112,7 +117,6 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     }
     if(x0_coord == 7 && y0_coord == 4 && x_coord == 7 && y_coord == 2 && bd[x_coord][y_coord] == 12){
         el = document.getElementById(id_place[7][0])
-        console.log("hereee",el)
         bd = changepos(7,0,7,3,bd);
         id_place = changepos(7,0,7,3,id_place);
         el.style.left = 627 +"px"
@@ -122,7 +126,6 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     //черная рокировка
     if(x0_coord == 0 && y0_coord == 4 && x_coord == 0 && y_coord == 6 && bd[x_coord][y_coord] == 6){
         el = document.getElementById(id_place[0][7])
-        console.log("hereee",el)
         bd = changepos(0,7,0,5,bd);
         id_place = changepos(0,7,0,5,id_place);
         el.style.left = 737 +"px"
@@ -131,7 +134,6 @@ function move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place){
     }
     if(x0_coord == 0 && y0_coord == 4 && x_coord == 0 && y_coord == 2 && bd[x_coord][y_coord] == 6){
         el = document.getElementById(id_place[0][0])
-        console.log("hereee",el)
         bd = changepos(0,0,0,3,bd);
         id_place = changepos(0,0,0,3,id_place);
         el.style.left = 627 +"px"
@@ -146,7 +148,6 @@ function step_shine(y,x,y1,x1){
     y = 105 + y * 55;
     x1 = 462 + x1 * 55;
     y1 = 105 + y1 * 55;
-    console.log(x,y,x1,y1);
     step_color.style.top = y + 'px';
     step_color.style.left = x + 'px';
     step_color2.style.top = y1 + 'px';
@@ -181,42 +182,34 @@ function can_move_to(x,y,fig){
         try{
             blocks[x-2][y-1] = 1;
         }catch{
-            console.log('-1_varxant');
         }
         if (x < 6 && y < 7){
             blocks[x+2][y+1] = 1;
         }else{
-            console.log('-1_varxant');
         }
         if (x < 6 && y > 0){
             blocks[x+2][y-1] = 1;
         }else{
-            console.log('-1_varxant');
         }
         if (x <  7 && y < 6){
             blocks[x+1][y+2] = 1;
         }else{
-            console.log('-1_varxant');
         }
         if (x < 7 && y > 1){
         blocks[x+1][y-2] = 1;
         }else{
-            console.log('-1_varxant');
         }
         if (x > 0 && y < 6){
             blocks[x-1][y+2] = 1;
         }else{
-            console.log('-1_varxant');
         }
         try{
             blocks[x-1][y-2] = 1;
         }catch{
-            console.log('-1_varxant');
         }
         if (x > 1 && y < 7){
             blocks[x-2][y+1] = 1;
         }else{
-            console.log('-1_varxant');
         }        
     }
     //как ходят слоны
@@ -294,7 +287,6 @@ function can_move_to(x,y,fig){
                     if ((7 >= l)&&(7 >= i)&&((l >= 0)&&(i >= 0))){
                         blocks[i][l] = 1;
                     }else{
-                        console.log('-1_variant');
                     }
                 }
             }
@@ -327,7 +319,6 @@ function can_move_to(x,y,fig){
                 blocks[x-2][y] = 1;    
             }
         }
-    console.log('step',blocks);
     return blocks;
 }
 
@@ -336,7 +327,6 @@ function is_figure_on_line(x,y,x0,y0,board){
 
     //для строки
     if (x == x0){
-        console.log('stroka');
         var ind = y0;
         if (y > y0){            
             while (ind != y-1){             
@@ -357,7 +347,6 @@ function is_figure_on_line(x,y,x0,y0,board){
             return true;
         }
     }else if (y == y0){
-        console.log('stolbec');
         var ind = x0;
         if (x > x0){
             while (ind != x - 1){
@@ -379,7 +368,6 @@ function is_figure_on_line(x,y,x0,y0,board){
         }
         return true;
     }else{
-        console.log('diagonal',x,y,x0,y0);
         var ind = x0;
         var lnd = y0;
         while((ind != x)&&(lnd != y)){

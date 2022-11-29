@@ -93,13 +93,20 @@
             </p1>
 
             <script
+            type = "text/javascript" src = "js/check.js">
+            </script>
+
+            <script
                 type = 'text/javascript' src = "js/move.js">
             </script>
+
             <script
                 type = 'text/javascript' src = 'js/show_possible.js'>
             </script>
     
             <script type="text/javascript">
+                var w_k_coords = [7,4]
+                var b_k_coords = [0,4]
                 var w_king_steps = 0;//отслеживание ходил белый король иле нет
                 var b_king_steps = 0;//отслеживание ходил черный король или нет
                 var w_castles = [0,0];//отслеживание ходила ли белая ладья 
@@ -125,7 +132,7 @@
                     sound = document.getElementById('step');
                     elements[i] = document.getElementById(ids[i]);
                     elements[i].onmousedown = function(e) {
-
+                        //отслеживание очередности хода
                         if (((w_b_step % 2 == 0)&&(i > 15))||((w_b_step % 2 == 1)&&(i <= 15))){
                             return;
                         }
@@ -136,7 +143,7 @@
                         
                         console.log('координаты начала: ',x0_coord,y0_coord);
     
-                        elements[i].style.position = 'absolute';
+                        // elements[i].style.position = 'absolute';
                         var first_coorx = div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 + 22 + 'px';
                         var first_coory = div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 + 'px';
                         
@@ -171,7 +178,19 @@
                             var x_coord = div((div((e.pageY - elements[i].offsetHeight / 2) + 32,55) * 55 - 4 - 101),55);
                             clear_p();
                             console.log('координаты конца: ',x_coord,y_coord,bd);
-    
+                            console.log("координаты королей: ",w_k_coords,b_k_coords)
+
+                            //создание копии с уже сделанным ходом для проверки шаха
+                            let copy_w_k_coords = w_k_coords
+                            let copy_b_k_coords = b_k_coords
+                            if(bd[x0_coord][y0_coord] == 6){
+                                copy_b_k_coords = [x_coord,y_coord]
+                            }else if(bd[x0_coord][y0_coord] == 12){
+                                copy_w_k_coords = [x_coord,y_coord]
+                            }
+                            let test = JSON.parse(JSON.stringify(bd))
+                            test[x_coord][y_coord] = test[x0_coord][y0_coord]
+                            test[x0_coord][y0_coord] = 0
     
                             //проверка что конечные координаты находятся на доске
                             if ((div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 > 879)||(div((e.pageX - elements[i].offsetWidth / 2) + 6,55) * 55 < 439)){
@@ -182,6 +201,16 @@
                                 elements[i].style.left = first_coorx;
                                 elements[i].style.top = first_coory;
     
+                            }else if((check_it(test,copy_w_k_coords,copy_b_k_coords)[0] == 1) && (w_b_step % 2 == 0)){
+                                elements[i].style.left = first_coorx;
+                                elements[i].style.top = first_coory;
+                                //создать уведомление, что так нельзя походить из-за шаха
+
+                            }else if((check_it(test,copy_w_k_coords,copy_b_k_coords)[1] == 1) && (w_b_step % 2 == 1)){
+                                elements[i].style.left = first_coorx;
+                                elements[i].style.top = first_coory;
+                                //создать уведомление, что так нельзя походить из-за шаха
+
                             }else if (bd[x_coord][y_coord] == 0){
                                 // если поле пустое то передвигаем элементы в матрице и на доске
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
@@ -218,10 +247,6 @@
                                         }
                                     //белая пешка
                                     }else if (bd[x0_coord][y0_coord] == 7){
-                                        // if ((bd[x0_coord-1][y0_coord] != 0)||(y0_coord != y_coord)) {
-                                        // elements[i].style.left = first_coorx;
-                                        // elements[i].style.top = first_coory;
-                                        // }else{
                                         moveTo(e);
                                         move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         if (y0_coord != y_coord ){
@@ -235,11 +260,6 @@
                                         // }
                                     //черная пешка
                                     }else if (bd[x0_coord][y0_coord] == 1){
-                                         
-                                        // if ((bd[x0_coord+1][y0_coord] != 0)||(y0_coord != y_coord)){
-                                        //     elements[i].style.left = first_coorx;
-                                        //     elements[i].style.top = first_coory;
-                                        // }else{
                                         moveTo(e);
                                         move_to_free(x0_coord,y0_coord,x_coord,y_coord,bd,id_place);
                                         if (y0_coord != y_coord){
@@ -262,9 +282,10 @@
                                 }
                                 
                             }else{
-                            //ready block end  
+                                //ready block end  
                                 // если что-то стоит уже на этом месте проверяем другой ли это цвет фигуры возвращаем на исходное положение
                                 steps = can_move_to(x0_coord,y0_coord,bd[x0_coord][y0_coord]);
+                                steps = pos_moves(x0_coord,y0_coord,bd[x0_coord][y0_coord],bd,steps)
                                 if (steps[x_coord][y_coord] == 1){
                                     if ((div(bd[x_coord][y_coord],7) - div(bd[x0_coord][y0_coord],7)) != 0){
                                         if (bd[x0_coord][y0_coord] % 6 == 4){
@@ -365,7 +386,11 @@
                                     elements[i].style.top = first_coory;
                                 }
                             }
+                        let tmp = check_it(bd,w_k_coords,b_k_coords)
+                        console.log("--------",tmp,bd,w_k_coords,b_k_coords)
                         }
+                        
+                        //document.write()
                     }
                     
                     elements[i].ondragstart = function() {
@@ -376,6 +401,5 @@
     
             </script></p>
             <script type = 'text/javascript' src = "js/reset.js" ></script>
-
 </body>
 </html>
