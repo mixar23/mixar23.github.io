@@ -181,8 +181,8 @@
                             console.log("координаты королей: ",w_k_coords,b_k_coords)
 
                             //создание копии с уже сделанным ходом для проверки шаха
-                            let copy_w_k_coords = w_k_coords
-                            let copy_b_k_coords = b_k_coords
+                            let copy_w_k_coords = w_k_coords.slice()
+                            let copy_b_k_coords = b_k_coords.slice()
                             if(bd[x0_coord][y0_coord] == 6){
                                 copy_b_k_coords = [x_coord,y_coord]
                             }else if(bd[x0_coord][y0_coord] == 12){
